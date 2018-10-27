@@ -8,21 +8,24 @@ public class E4P1 {
 		
 		int n = Integer.parseInt(s);
 		
-		int [] a;
+		int [] a = new int [n/2];
 		
-		for (int i = 0, k = 2; k < n && n%k == 0; ++k)
+		int greatestI = -1;
+		
+		for (int i = 0, k = 2; k < n && n%k == 0; ++k) {
+			greatestI = i;
 			a[i++] = k;
-			
-		if (a.length == 0)
+		}	
+		if (greatestI == -1)
 			JOptionPane.showMessageDialog(null, "The number is prime");
 		else {
 		
 		String s2 = "";
 		
-		for (i = 0; i < a.length; ++i)
-			s2 += a[i];
+		for (int i = 0; i <= greatestI; ++i)
+			s2 += a[i] + " ";
 				
-		JOptionPane.showMessageDialog(null, s2);
+		JOptionPane.showMessageDialog(null, "Nontrivial divisors of " + n + ": " + s2);
 		
 		}
 		
