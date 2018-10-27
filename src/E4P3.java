@@ -9,28 +9,24 @@ public class E4P3 {
 		int n = 1;
 		int max = 0;
 		int maxN = 0;
-		
+
+		System.out.print("enter a natural number (0 if done): ");
+		n = scan.nextInt();
 		while (n !=0) {
-			System.out.print("enter a natural number (0 if done): ");
-			n = scan.nextInt();
-			System.out.println();
-		
 			int sum = 0;
 			int newN = n;
-			
-		
-			while (n >= 10) {
+
+			while (n > 0) {
 				sum += n % 10;
 				n /= 10;
 			}
-			
-			sum += n;
-			
+
 			if (sum > max) {
 				max = sum;
 				maxN = newN;
 			}
-			
+			System.out.print("enter a natural number (0 if done): ");
+			n = scan.nextInt();
 		}
 		
 		System.out.print("Max sum of digits was " + max + " for " + maxN);
