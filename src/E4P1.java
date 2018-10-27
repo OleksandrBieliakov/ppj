@@ -12,9 +12,11 @@ public class E4P1 {
 		
 		int greatestI = -1;
 		
-		for (int i = 0, k = 2; k < n && n%k == 0; ++k) {
-			greatestI = i;
-			a[i++] = k;
+		for (int i = 0, k = 2; k <= n/2; ++k) {
+			if (n%k == 0) {
+				greatestI = i;
+				a[i++] = k;
+			}
 		}	
 		if (greatestI == -1)
 			JOptionPane.showMessageDialog(null, "The number is prime");
