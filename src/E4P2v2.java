@@ -10,7 +10,7 @@ public class E4P2v2 {
 
         String s1 = "";
         boolean first = true;
-        while (n > 0) {
+        while (n > 0 || first) {
             if (first)
                 first = false;
             else
