@@ -27,7 +27,7 @@ public class E4P4 {
 		else if ("b".equals(st))
 			n -= k;
 			
-		k /= 2;
+		k = k / 2 + k % 2;
 		
 		}
 		
