@@ -6,10 +6,10 @@ public class E5P1 {
 		
 		Scanner scan = new Scanner(System.in);
 		
-		System.out.println("Please endter two integers a and b from the interval [-5;5] and a < b ");
+		System.out.println("Please enter two integers a and b from the interval [-5;5] and a < b ");
 		int a = scan.nextInt();
 		int b = scan.nextInt();
-		System.out.println("Please endter two integers c and d from the interval [-5;5] and c < d");
+		System.out.println("Please enter two integers c and d from the interval [-5;5] and c < d");
 		int c = scan.nextInt();
 		int d = scan.nextInt();
 		
