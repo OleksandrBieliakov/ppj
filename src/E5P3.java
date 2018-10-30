@@ -43,41 +43,41 @@ public class E5P3 {
 		long temp = res;
 		temp >>>= 47;
 		
-		System.out.printf("%13d", "Caller: ");
+		System.out.printf("%13s", "Caller: ");
 		System.out.println(temp);
 		
 		temp = res;
 		temp >>>= 40;
 		temp &= 0b1111111;
 		
-		System.out.printf("%13d", "Caller zone: ");
+		System.out.printf("%13s", "Caller zone: ");
 		System.out.println(temp);
 		
 		temp = res;
 		temp >>>= 23;
 		temp &= 0b11111111111111111;
 		
-		System.out.printf("%13d", "Callee: ");
+		System.out.printf("%13s", "Callee: ");
 		System.out.println(temp);
 		
 		temp = res;
 		temp >>>= 16;
 		temp &= 0b1111111;
 		
-		System.out.printf("%13d", "Callee zone: ");
+		System.out.printf("%13s", "Callee zone: ");
 		System.out.println(temp);
 		
 		temp = res;
 		temp >>>= 3;
 		temp &= 0b1111111111111;
 		
-		System.out.printf("%13d", "Duration: ");
+		System.out.printf("%13s", "Duration: ");
 		System.out.println(temp);
 		
 		res &= 0b111;
 		
-		System.out.printf("%13d", "Tariff: ");
-		System.out.println(temp);
+		System.out.printf("%13s", "Tariff: ");
+		System.out.println(res);
 		
 	}
 	
