@@ -10,7 +10,7 @@ public class E4P2 {
 
 		String s1 = "";
 		
-        for (int i = 0; i < 31; ++i, n = n >>> 1) {
+        for (int i = 0; i < 32; ++i, n = n >>> 1) {
             if (n == 1){
 				s1 += "1.";
 				break;

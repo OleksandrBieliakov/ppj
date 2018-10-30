@@ -14,7 +14,6 @@ public class E4P1v3 {
             if (n % k == 0)
                 s1 += " " + k;
 
-
         if (s1 == "")
             JOptionPane.showMessageDialog(null, "The number " + n + " is prime");
         else {

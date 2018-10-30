@@ -7,28 +7,29 @@ public class E4P4 {
         JOptionPane.showMessageDialog(null, 
 		"20 Questions game!\nThink of a number from 1 to million.");
 
-		int n = 500000, k = 250000, i = 0;
+		int min = 0, max = 1000000, i = 0, n = 0, k = 0;
 		
         String st = "";
         
         while (true) {
-		
-		st = JOptionPane.showInputDialog(null, 
-		"Is this " + n + "?\nAnswer \"s\" if " + n + " is smaller than the chosen number;" + 
-		"\n\"b\" if " + n + " is bigger;\n\"y\" if " + n + " is your number."
-		);
-		
-		++i;
-		
-		if ("y".equals(st))
-			break;
-		if ("s".equals(st))
-			n += k;
-		else if ("b".equals(st))
-			n -= k;
 			
-		k = k / 2 + k % 2;
+			k = (max - min)/2;
+			n = min + k;
+			
+			st = JOptionPane.showInputDialog(null, 
+			"Is this " + n + "?\nAnswer \"s\" if " + n + " is smaller than the chosen number;" + 
+			"\n\"b\" if " + n + " is bigger;\n\"y\" if " + n + " is your number."
+			);
 		
+			++i;
+		
+			if ("y".equals(st))
+				break;
+			if ("s".equals(st)) {
+				min += k;
+			} else if ("b".equals(st)) {
+				max -= k;
+			}
 		}
 		
 		JOptionPane.showMessageDialog(null, 
