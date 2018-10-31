@@ -10,74 +10,36 @@ public class E5P3 {
 							   int callee, int callee_zone,
 							   int duration, int tariff) {
 		
-		long res = 0;
-		
-		long temp = caller;
-		temp <<= 47;
-		res |= temp;
-		
-		temp = caller_zone;
-		temp <<= 40;
-		res |= temp;
-		
-		temp = callee;
-		temp <<= 23;
-		res |= temp;
-		
-		temp = callee_zone;
-		temp <<= 16;
-		res |= temp;
-		
-		temp = duration;
-		temp <<= 3;
-		res |= temp;
-		
-		res |= tariff;
-		
-		return res;
-		
+		return    (long) tariff << 61
+				| (long) duration << 48
+				| (long) callee_zone << 41
+				| (long) callee << 24
+				| (long) caller_zone << 17
+				| (long) caller;
+				
 	}
 	
 	public static void info(long res) {
 		
-		long temp = res;
-		temp >>>= 47;
+		long caller = res & 0b11111111111111111;
+		long caller_zone = res >> 17 & 0b1111111;
+		long callee = res >> 24 & 0b11111111111111111;
+		long callee_zone = res >> 41 & 0b1111111;
+		long duration = res >> 48 & 0b1111111111111;
+		long tariff = res >> 61 & 0b111;
 		
-		System.out.printf("%13s", "Caller: ");
-		System.out.println(temp);
+		print("Caller:", caller);
+		print("Caller zone:", caller_zone);
+        print("Callee:", callee);
+        print("Callee zone:", callee_zone);
+        print("Duration:", duration);
+        print("Tariff:", tariff);
 		
-		temp = res;
-		temp >>>= 40;
-		temp &= 0b1111111;
+	}
+	
+	public static void print (String name, long value) {
 		
-		System.out.printf("%13s", "Caller zone: ");
-		System.out.println(temp);
-		
-		temp = res;
-		temp >>>= 23;
-		temp &= 0b11111111111111111;
-		
-		System.out.printf("%13s", "Callee: ");
-		System.out.println(temp);
-		
-		temp = res;
-		temp >>>= 16;
-		temp &= 0b1111111;
-		
-		System.out.printf("%13s", "Callee zone: ");
-		System.out.println(temp);
-		
-		temp = res;
-		temp >>>= 3;
-		temp &= 0b1111111111111;
-		
-		System.out.printf("%13s", "Duration: ");
-		System.out.println(temp);
-		
-		res &= 0b111;
-		
-		System.out.printf("%13s", "Tariff: ");
-		System.out.println(res);
+		System.out.printf("%-12s %7d\n", name, value);
 		
 	}
 	
