@@ -1,11 +1,11 @@
 public class E6P1 {
 	
 	public static boolean hasTwoRoots(double a, double b, double c) {
-		return a != 0 && (b*b - 4*a*c) > 0 ? true : false;		
+		return a != 0 && (b*b - 4*a*c) > 0;		
 	}
 	
 	public static boolean monot(double a, double b, double c) {
-		return a > b && b > c ? true : false;
+		return a > b && b > c;
 	}
 	
 	public static double maxEI(double a, double b, double c) {
