@@ -5,7 +5,7 @@ public class E6P1 {
 	}
 	
 	public static boolean monot(double a, double b, double c) {
-		return a > b && b > c;
+		return (a > b && b > c) || (a < b && b < c);
 	}
 	
 	public static double maxEI(double a, double b, double c) {
