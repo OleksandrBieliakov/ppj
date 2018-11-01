@@ -9,18 +9,11 @@ public class E6P1 {
 	}
 	
 	public static double maxEI(double a, double b, double c) {
-		double max = a;
-		if (a < b) max = b;
-		if (max < c) max = c;
-		return max;
+		return a < b? (b < c? c : b) : (a < c? c : a);
 	}
 	
 	public static int numPos(double a, double b, double c) {
-		int num = 0;
-		if (a > 0) ++num;
-		if (b > 0) ++num;
-		if (c > 0) ++num;
-		return num;
+		return (a > 0? 1 : 0) + (b > 0? 1 : 0) + (c > 0? 1 : 0);
 	}
 	
 	private static void print (double a, double b, double c, String s) {
