@@ -11,8 +11,7 @@ public class E7P2 {
 		
 		for(int j = max; j > 0; --j) {
 			for(int k = 0; k < arr.length; ++k) {
-				if(arr[k] >= j) System.out.print("*");
-				else System.out.print(" ");
+				System.out.print(arr[k] >= j ? "*" : " ");
 			}
 			System.out.println();
 		}
