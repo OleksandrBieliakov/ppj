@@ -11,19 +11,18 @@ public class E7P4v2 {
 			if(arr[i] > max) max = arr[i];
 		}
 		
-		int[] srr = new int[max + 1];
+		boolean[] srr = new boolean[max + 1];
 		
 		for(int j = 0; j < arr.length; ++j) {
-			srr[arr[j]] = 1;
+			srr[arr[j]] = true;
 		}
 		
 		for(int k = 0; k < brr.length; ++k) {
-			if(arr[k] <= max) srr[arr[k]] = 0;
+			if(brr[k] <= max) srr[brr[k]] = false;
 		}
 		
 		for(int l = 0; l < srr.length; ++l)	{
-			if(srr[l] == 1)
-				System.out.print(l + " ");
+			if(srr[l]) System.out.print(l + " ");
 		}
 		
 	}
