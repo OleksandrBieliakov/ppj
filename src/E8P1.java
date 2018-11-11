@@ -2,7 +2,7 @@ public class E8P1 {
 	
 	public static void index (int[][] arr) {
 		
-		int rowM = 0, rowMi = 0;
+		int rowM = 0, rowMi = Integer.MIN_VALUE;
 		
 		for(int i = 0, rowS = 0; i < arr.length; ++i) {
 			
@@ -19,7 +19,7 @@ public class E8P1 {
 			
 		}
 		
-		int colM = 0, colMi = 0;
+		int colM = 0, colMi = Integer.MIN_VALUE;
 		
 		for(int k = 0, colS = 0; k < arr[0].length; ++k) {
 			
