@@ -4,14 +4,14 @@ public class E8P2 {
 		
 		int[] brr = new int[arr.length];
 		
-		for(int j = 0, max = 0; j < arr.length; ++j) {
+		for(int j = 0, max = 0b11111111111111111111111111111111; j < arr.length; ++j) {
 			for(int k = 0; k < arr[j].length; ++k) {
 				if(arr[j][k] > max) {
 					max = arr[j][k];
 				}				
 			}
 			brr[j] = max;
-			max = 0;
+			max = 0b11111111111111111111111111111111;
 		}
 		
 		return brr;
