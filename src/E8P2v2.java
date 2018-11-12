@@ -1,4 +1,4 @@
-public class src_E8P2 {
+public class E8P2v2 {
 	
 	public static boolean check(int arr[][]) {
 		
