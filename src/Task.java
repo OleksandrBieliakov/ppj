@@ -8,24 +8,25 @@ public class Task {
 		int[][] brr = { {0,0,1}, 
 						{0,1,0}, 
 						{1,0,0} };
-		
-		int[][]crr = new int[arr.length][arr[0].length];
+
+		int len = arr.length;
+		int[][]crr = new int[len][arr[0].length];
 		
 		int sum = 0;
 		
-		for(int i = 0; i < arr.length; ++i) {
+		for(int i = 0; i < len; ++i) {
 			
-			for(int j = 0; j < arr.length; ++j) {
+			for(int j = 0; j < len; ++j) {
 				
 				System.out.print("[" + i + "," + j + "]: ");
 				
-				for(int x = 0; x < arr.length; ++x) {
+				for(int x = 0; x < len; ++x) {
 					
 					sum += (arr[i][x]* brr[x][j]);
-					
+
+					if(x > 0) System.out.print(" + ");
 					System.out.print(arr[i][x] + " * " + brr[x][j]);
-					if(x < 2) System.out.print(" + ");
-					
+
 				}
 				
 				crr[i][j] = sum;
