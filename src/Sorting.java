@@ -84,7 +84,7 @@ public class Sorting {
 			System.out.print(i + " ");
 		System.out.println();
 		
-		// counts how many time an array can be divided by 2
+		// counts how many times an array can be divided by 2
 		int count = 0;
 		int div = arr.length;
 		while(div > 1) {

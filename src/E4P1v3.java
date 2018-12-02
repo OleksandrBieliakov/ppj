@@ -16,11 +16,8 @@ public class E4P1v3 {
 
         if (s1 == "")
             JOptionPane.showMessageDialog(null, "The number " + n + " is prime");
-        else {
-
+        else 
             JOptionPane.showMessageDialog(null, "Nontrivial divisors of " + n + ":" + s1);
-
-        }
 
     }
 
