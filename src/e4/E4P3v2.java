@@ -1,3 +1,5 @@
+package e4;
+
 import java.util.Scanner;
 
 public class E4P3v2 {

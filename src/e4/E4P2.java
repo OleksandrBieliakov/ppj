@@ -1,3 +1,5 @@
+package e4;
+
 import javax.swing.JOptionPane;
 
 public class E4P2 {

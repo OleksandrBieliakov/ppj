@@ -1,19 +1,17 @@
 package e10.p2;
 
-import e10.p1.Square;
-
 public class Circle {
-	
-	private int radius;
-	
-	public Circle(int r) {
+
+	private double radius;
+
+	public Circle(double r) {
 		radius = r;
 	}
-	
+
 	public double getRadius() {
-		return side;
+		return radius;
 	}
-	
+
 	public double getArea() {
 		return Math.PI*radius*radius;
 	}
@@ -21,18 +19,32 @@ public class Circle {
 	public double getPerimeter() {
 		return 2*Math.PI*radius;
 	}
-	
-	public double getInscribedSquare() {
-		return Square sq = new Square(radius*Math.sqrt(2));
+
+	public Square getInscribedSquare() {
+		Square sq = new Square(radius*Math.sqrt(2));
+		return sq;
 	}
-	
-	public double getCircumscribedSquare() {
-		return Square sq = new Square(2*radius);
+
+	public Square getCircumscribedSquare() {
+		Square sq = new Square(2*radius);
+		return sq;
 	}
-	
+
 	@Override
 	public String toString() {
-		return;
+		return "Circle[" + radius + "]";
 	}
-	
+
+	public Circle(Square square) {
+		this(Math.sqrt(square.getArea()/Math.PI));
+	}
+
+	public static Square[] getSquares(Circle[] arr) {
+		Square[] squares = new Square[arr.length];
+		for(int i = 0; i < squares.length; ++i) {
+			squares[i] = new Square(Math.sqrt(arr[i].getArea()));
+		}
+		return squares;
+	}
+
 }

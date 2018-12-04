@@ -1,3 +1,5 @@
+package e4;
+
 import javax.swing.*;
 
 public class E4P1v2 {

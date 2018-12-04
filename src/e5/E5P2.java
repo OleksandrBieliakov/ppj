@@ -1,3 +1,5 @@
+package e5;
+
 import java.util.Scanner;
 
 public class E5P2 {
