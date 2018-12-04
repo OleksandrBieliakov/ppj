@@ -2,17 +2,23 @@ import java.util.Scanner;
 
 public class TickTackToe {
 
-    public static int makeTurn(int board) {
+    private static char symbol = 'X';
+
+    private static int makeTurn(int board) {
+
+        System.out.println(symbol + " turn:");
 
         Scanner scan = new Scanner(System.in);
         int position = scan.nextInt();
-        String symbol = scan.next();
-        int numSymbol = 0;
+        int numSymbol;
 
-        if(symbol.equals("X"))
+        if (symbol == 'X') {
             numSymbol = 0b11;
-        else
+            symbol = '0';
+        } else {
             numSymbol = 0b01;
+            symbol = 'X';
+        }
 
         numSymbol <<= (position - 1)*2;
 
@@ -20,7 +26,7 @@ public class TickTackToe {
 
     }
 
-    public static void displayBoard(int board) {
+    private static void displayBoard(int board) {
 
         for(int i = 9; i > 0; --i) {
             if((board & 0b11) == 0b11)
@@ -39,7 +45,7 @@ public class TickTackToe {
 
     public static void main(String[] args) {
 
-        System.out.println("Enter a number of a field first, then \"X\" or \"0\"(zero)." +
+        System.out.println("Enter a number of a field" +
                             "\nPress Ctrl + C to escape." +
                             "\nFields numbers:\n1 2 3\n4 5 6\n7 8 9");
         int board = 0;
