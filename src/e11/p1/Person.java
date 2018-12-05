@@ -24,15 +24,12 @@ public class Person {
     }
 
     public boolean isFemale() {
-        if(name.charAt(name.length()-1) == 'a')
-            return true;
-        return false;
+        return name.endsWith("a");
+
     }
 
     public static Person getOlder(Person p1, Person p2) {
-        if(p1.getBirthYear() > p2.getBirthYear())
-            return p1;
-        return p2;
+        return p1.getBirthYear() > p2.getBirthYear() ? p1 : p2;
     }
 
     public static Person getOldest(Person[] persons) {
