@@ -10,10 +10,14 @@ public class Account {
     }
 
     public void deposit(double sum) {
+        if(sum < 0)
+            throw new IllegalArgumentException("The value of a deposit cannot be negative.");
         balance += sum;
     }
 
     public void withdraw(double sum) {
+        if(sum > balance)
+            throw new IllegalArgumentException("The requested sum exceeds the available funds.");
         balance -= sum;
     }
 
@@ -29,8 +33,5 @@ public class Account {
     public void addInterest() {
         balance *= (1 + rate/100);
     }
-
-
-
 
 }
