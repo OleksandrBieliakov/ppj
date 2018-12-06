@@ -1,4 +1,4 @@
-package someTasks;
+package sometasks;
 
 import java.util.Random;
 
