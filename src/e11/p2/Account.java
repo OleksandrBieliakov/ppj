@@ -9,21 +9,43 @@ public class Account {
         return balance;
     }
 
-    public void deposit(double sum) {
+    public void doDeposit(double sum) {
         if(sum < 0)
-            throw new IllegalArgumentException("The value of a deposit cannot be negative.");
+            throw new IllegalArgumentException("The sum of a deposit cannot be negative.");
         balance += sum;
     }
 
-    public void withdraw(double sum) {
+    public void doWithdraw(double sum) {
+        if(sum < 0)
+            throw new IllegalArgumentException("The sum of a withdraw cannot be negative.");
         if(sum > balance)
             throw new IllegalArgumentException("The requested sum exceeds the available funds.");
         balance -= sum;
     }
 
+    public void deposit(double sum) {
+        try {
+            doDeposit(sum);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void withdraw(double sum) {
+        try {
+            doWithdraw(sum);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public void transfer (Account account, double sum) {
-        this.withdraw(sum);
-        account.deposit(sum);
+        try {
+            this.doWithdraw(sum);
+            account.doDeposit(sum);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void setInterestRate(double r) {
