@@ -1,4 +1,4 @@
-package HarryPotter;
+package harryPotter;
 
 public class Voldemort {
 
