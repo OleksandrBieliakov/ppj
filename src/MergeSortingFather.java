@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class MergeSorting {
+public class MergeSortingFather {
 
     /**
      * Sort by merge sorting algorithm.
