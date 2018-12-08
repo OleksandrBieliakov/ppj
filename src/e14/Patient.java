@@ -1,23 +1,19 @@
 package e14;
 
-public class Patient {
+abstract public class Patient {
 
-    private String patient;
+    private String name;
 
     public Patient (String name) {
-        patient = name;
+        this.name = name;
     }
 
     public String name() {
-        return patient;
+        return name;
     }
 
-    public String illness() {
-        return "?";
-    }
+    abstract public String illness();
 
-    public String treatment() {
-        return "?";
-    }
+    abstract public String treatment();
 
 }
