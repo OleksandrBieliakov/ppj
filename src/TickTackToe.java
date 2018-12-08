@@ -23,19 +23,19 @@ public class TickTackToe {
 
         int clay1 = symb;
         for(int j = 0; j < 2; ++j) {
-            clay1 = (clay1 << 8) | clay1;
+            clay1 = (clay1 << 8) | symb;
         }
         if((clay1 & board) == clay1) return winner;
 
         int clay2 = symb << 4;
         for(int j = 0; j < 2; ++j) {
-            clay2 = (clay2 << 4) | clay2;
+            clay2 = (clay2 << 4) | symb;
         }
         if((clay2 & board) == clay2) return winner;
 
         int clay3 = symb;
         for(int j = 0; j < 2; ++j) {
-            clay3 = (clay3 << 2) | clay3;
+            clay3 = (clay3 << 2) | symb;
         }
         for(int i = 0; i < 3; ++i) {
             if((clay3 & board) == clay3) return winner;
@@ -44,7 +44,7 @@ public class TickTackToe {
 
         int clay4 = symb;
         for(int j = 0; j < 2; ++j) {
-            clay4 = (clay4 << 6) | clay4;
+            clay4 = (clay4 << 6) | symb;
         }
         for(int i = 0; i < 3; ++i) {
             if((clay4 & board) == clay4) return winner;
@@ -73,7 +73,7 @@ public class TickTackToe {
             if(position < 1 || position > 9) throw new InputMismatchException();
         } catch (InputMismatchException ex) {
             System.out.println("Please enter a number from 1 to 9.\n");
-            makeTurn(board);
+            return makeTurn(board);
         }
 
         int numSymbol;
