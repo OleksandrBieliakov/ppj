@@ -13,7 +13,7 @@ public class Password {
         charMet[0] = arr[0];
         MAIN_LOOP: for (int i = 1; i < arr.length; ++i) {
                         for (int j = 0; j < difChar; ++j) {
-                            if (arr[i] == arr[j]) continue MAIN_LOOP;
+                            if (arr[i] == charMet[j]) continue MAIN_LOOP;
                         }
                         charMet[difChar++] = arr[i];
                     }
