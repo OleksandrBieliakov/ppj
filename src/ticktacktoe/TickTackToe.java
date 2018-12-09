@@ -7,15 +7,8 @@ public class TickTackToe {
 
     private static char symbol = 'X';
 
-    private static void changeSymbol() {
-        if (symbol == 'X') {
-            symbol = '0';
-        } else {
-            symbol = 'X';
-        }
-    }
-
     private static int winCond (int board) {
+
         int winner = 2;
         int symb = 0b01;
         if(symbol == '0') {
@@ -54,12 +47,14 @@ public class TickTackToe {
         }
 
         return 0;
+
     }
 
-    private static boolean checkPlace (int board, int newBoard) {
-        int magicNumber = 0b10_10_10_10_10_10_10_10_10;
-        if((board & magicNumber) == (newBoard & magicNumber)) return true;
-        return false;
+    private static boolean checkPosition (int board, int position) {
+        boolean used = false;
+        if((board & (0b10 << (position - 1)*2)) != 0) used = true;
+        if((board & (0b11 << (position - 1)*2)) != 0) used = true;
+        return used;
     }
 
     private static int makeTurn(int board) {
@@ -68,13 +63,18 @@ public class TickTackToe {
 
         Scanner scan = new Scanner(System.in);
 
-        int position = 0;
+        int position;
 
         try {
             position = scan.nextInt();
             if(position < 1 || position > 9) throw new InputMismatchException();
         } catch (InputMismatchException ex) {
             System.out.println("Please enter a number from 1 to 9.\n");
+            return makeTurn(board);
+        }
+
+        if(checkPosition(board, position)) {
+            System.out.println("This field is already occupied. Please enter another one.\n");
             return makeTurn(board);
         }
 
@@ -90,26 +90,21 @@ public class TickTackToe {
 
         numSymbol <<= (position - 1)*2;
 
-        int newBoard = board | numSymbol;
-        /*
-        if(checkPlace(board, newBoard)) {
-            System.out.println("This field is already occupied. Please enter another one.\n");
-            changeSymbol();
-            return makeTurn(board);
-        }
-        */
-        return newBoard;
+        return board | numSymbol;
 
     }
 
     private static void printSolid() {
+
         for(int i = 0; i < 6; ++i) {
             System.out.print("* ");
         }
         System.out.println("*");
+
     }
 
     private static int shiftPrint(int board) {
+
         if((board & 0b10) == 0b10)
             System.out.print("X");
         else if((board & 0b01) == 0b01)
@@ -117,6 +112,7 @@ public class TickTackToe {
         else
             System.out.print(" ");
         return board >>= 2;
+
     }
 
     private static int printLine(int board) {
@@ -162,6 +158,7 @@ public class TickTackToe {
                             "\nEnter a number of a field." +
                             "\nFields numbers:\n1 2 3\n4 5 6\n7 8 9\n");
         int board = 0;
+
         displayBoard(board);
         for(int i = 0; i < 9; ++i) {
             board = makeTurn(board);
