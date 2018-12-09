@@ -2,58 +2,77 @@ package e14extra.p1;
 
 public class Password {
 
-    public static boolean check (char[] arr) {
+    private static boolean check(char[] arr) {
 
         boolean isOk = true;
 
-        if(arr.length < 8) { System.out.println("Too short"); isOk = false; }
+        if (arr.length < 8) {
+            System.out.println("Too short");
+            isOk = false;
+        }
 
         int difChar = 1;
         char[] charMet = new char[arr.length];
         charMet[0] = arr[0];
-        MAIN_LOOP: for (int i = 1; i < arr.length; ++i) {
-                        for (int j = 0; j < difChar; ++j) {
-                            if (arr[i] == charMet[j]) continue MAIN_LOOP;
-                        }
-                        charMet[difChar++] = arr[i];
-                    }
-        if(difChar < 6) { System.out.println("Too few different characters"); isOk = false; }
+        MAIN_LOOP:
+        for (int i = 1; i < arr.length; ++i) {
+            for (int j = 0; j < difChar; ++j) {
+                if (arr[i] == charMet[j]) continue MAIN_LOOP;
+            }
+            charMet[difChar++] = arr[i];
+        }
+        if (difChar < 6) {
+            System.out.println("Too few different characters");
+            isOk = false;
+        }
 
         boolean hasDigit = false;
-        for (int i = 0; i < arr.length; ++i) {
-            if(arr[i] >= '0' && arr[i] <= '9') {
+        for (char ch : arr) {
+            if (ch >= '0' && ch <= '9') {
                 hasDigit = true;
                 break;
             }
         }
-        if(!hasDigit) { System.out.println("No digit"); isOk = false; }
+        if (!hasDigit) {
+            System.out.println("No digit");
+            isOk = false;
+        }
 
         boolean hasUCase = false;
-        for (int i = 0; i < arr.length; ++i) {
-            if(arr[i] >= 'A' && arr[i] <= 'Z') {
+        for (char ch : arr) {
+            if (ch >= 'A' && ch <= 'Z') {
                 hasUCase = true;
                 break;
             }
         }
-        if(!hasUCase) { System.out.println("No uppercase letter"); isOk = false; }
+        if (!hasUCase) {
+            System.out.println("No uppercase letter");
+            isOk = false;
+        }
 
         boolean hasLCase = false;
-        for (int i = 0; i < arr.length; ++i) {
-            if(arr[i] >= 'a' && arr[i] <= 'z') {
+        for (char ch : arr) {
+            if (ch >= 'a' && ch <= 'z') {
                 hasLCase = true;
                 break;
             }
         }
-        if(!hasLCase) { System.out.println("No lower letter"); isOk = false; }
+        if (!hasLCase) {
+            System.out.println("No lower letter");
+            isOk = false;
+        }
 
         boolean hasSymb = false;
-        for (int i = 0; i < arr.length; ++i) {
-            if(arr[i] < '0' || (arr[i] > '9' && arr[i] < 'A') || (arr[i] > 'Z' && (arr[i] < 'a') || arr[i] > 'z')) {
+        for (char ch : arr) {
+            if (ch < '0' || (ch > '9' && ch < 'A') || (ch > 'Z' && ch < 'a') || ch > 'z') {
                 hasSymb = true;
                 break;
             }
         }
-        if(!hasSymb) { System.out.println("No non-alphanumeric character"); isOk = false; }
+        if (!hasSymb) {
+            System.out.println("No non-alphanumeric character");
+            isOk = false;
+        }
 
         return isOk;
 
