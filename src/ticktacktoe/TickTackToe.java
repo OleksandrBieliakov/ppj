@@ -1,3 +1,5 @@
+package ticktacktoe;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -17,7 +19,7 @@ public class TickTackToe {
         int winner = 2;
         int symb = 0b01;
         if(symbol == '0') {
-            symb = 0b11;
+            symb = 0b10;
             winner = 1;
         }
 
@@ -55,7 +57,7 @@ public class TickTackToe {
     }
 
     private static boolean checkPlace (int board, int newBoard) {
-        int magicNumber = 0b01_01_01_01_01_01_01_01_01;
+        int magicNumber = 0b10_10_10_10_10_10_10_10_10;
         if((board & magicNumber) == (newBoard & magicNumber)) return true;
         return false;
     }
@@ -79,7 +81,7 @@ public class TickTackToe {
         int numSymbol;
 
         if (symbol == 'X') {
-            numSymbol = 0b11;
+            numSymbol = 0b10;
             symbol = '0';
         } else {
             numSymbol = 0b01;
@@ -89,13 +91,13 @@ public class TickTackToe {
         numSymbol <<= (position - 1)*2;
 
         int newBoard = board | numSymbol;
-
+        /*
         if(checkPlace(board, newBoard)) {
             System.out.println("This field is already occupied. Please enter another one.\n");
             changeSymbol();
             return makeTurn(board);
         }
-
+        */
         return newBoard;
 
     }
@@ -108,9 +110,9 @@ public class TickTackToe {
     }
 
     private static int shiftPrint(int board) {
-        if((board & 0b11) == 0b11)
+        if((board & 0b10) == 0b10)
             System.out.print("X");
-        else if((board & 0b11) == 0b01)
+        else if((board & 0b01) == 0b01)
             System.out.print("0");
         else
             System.out.print(" ");

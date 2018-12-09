@@ -1,3 +1,5 @@
+package ticktacktoe;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
