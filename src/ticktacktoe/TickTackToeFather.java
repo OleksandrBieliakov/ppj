@@ -1,7 +1,9 @@
+package ticktacktoe;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class TickTackToe {
+public class TickTackToeFather {
     private static final int TURN_X = 0b10, TURN_0 = 0b01;
 
     private static final int[] WIN_X = {
