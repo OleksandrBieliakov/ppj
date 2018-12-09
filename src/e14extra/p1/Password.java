@@ -3,6 +3,7 @@ package e14extra.p1;
 public class Password {
 
     public static boolean check (char[] arr) {
+
         boolean isOk = true;
 
         if(arr.length < 8) { System.out.println("Too short"); isOk = false; }
@@ -55,6 +56,7 @@ public class Password {
         if(!hasSymb) { System.out.println("No non-alphanumeric character"); isOk = false; }
 
         return isOk;
+
     }
 
     public static void main(String[] args) {
@@ -66,23 +68,11 @@ public class Password {
                 "abc123><".toCharArray(),
                 "Zorro@123".toCharArray()
         };
-
-        for (int i = 0; i < passwords.length; ++i) {
-
-            char[] password = new char[passwords[i].length];
-            for (int j = 0; j < password.length; ++j) {
-                password[j] = passwords[i][j];
-            }
-
-            System.out.print("checking ");
-            for (char ch : password) {
-                System.out.print(ch);
-            }
+        for (char[] password : passwords) {
+            System.out.print("checking " + new String(password));
             System.out.println();
-
             if (check(password)) System.out.println("OK");
             System.out.println();
-
         }
 
     }
