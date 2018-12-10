@@ -8,24 +8,14 @@ public class ChessKnight {
 
         int[][] moves = { {-2, 1}, {-1, 2}, {1, 2}, {2 ,1}, {2, -1}, {1, -2}, {-1, -2}, {-2, -1} };
 
-        boolean[] fM = new boolean[8];
+        String[] stMoves = new String[moves.length];
 
-        if(col - 1 < 'a') { fM[1] = true; fM[6] = true; }
-        if(col - 2 < 'a') { fM[0] = true; fM[7] = true; }
-        if(col + 1 > 'h') { fM[2] = true; fM[5] = true; }
-        if(col + 2 > 'h') { fM[3] = true; fM[4] = true; }
-        if(row - 1 < '1') { fM[4] = true; fM[7] = true; }
-        if(row - 2 < '1') { fM[5] = true; fM[6] = true; }
-        if(row + 1 > '8') { fM[0] = true; fM[3] = true; }
-        if(row + 2 > '8') { fM[1] = true; fM[2] = true; }
-
-        String[] stMoves = new String[fM.length];
-
-        for(int i = 0; i < fM.length; ++i) {
-            if(!fM[i]){
+        for(int i = 0; i < moves.length; ++i) {
+            int moveCol = col + moves[i][0];
+            int moveRow = row + moves[i][1];
+            if (moveCol >= 'a' && moveCol <= 'h' && moveRow >= '1' && moveRow <= '8') {
                 StringBuilder sb = new StringBuilder();
-                sb.append((char)(col + moves[i][0]));
-                sb.append((char)(row + moves[i][1]));
+                sb.append((char) moveCol).append((char) moveRow);
                 stMoves[i] = sb.toString();
             }
         }
