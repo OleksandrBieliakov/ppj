@@ -6,7 +6,7 @@ public class ChessKnightFather {
         char col = pos.charAt(0);
         char row = pos.charAt(1);
 
-        int[][] moves = {{-2, 1}, {-1, 2}, {1, 2}, {2, 1}, {2, -1}, {1, -2}, {-1, -2}, {-2, -1}};
+        int[][] moves = {{-2, -1}, {-2, 1}, {-1, -2}, {-1, 2}, {1, -2}, {1, 2}, {2, -1}, {2, 1}};
 
         StringBuilder sb = new StringBuilder();
         for (int[] move : moves) {
