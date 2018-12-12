@@ -1,4 +1,5 @@
 package e14extra.p4;
+import java.util.Objects;
 
 public class Frac {
 
@@ -6,14 +7,8 @@ public class Frac {
     private int denom;
 
     public Frac (int num, int denom) {
-        int gcd = gcd(num, denom);
-        if(denom < 0){
-            num *= -1;
-            denom *= -1;
-        }
-        if(num == 0) denom = 1;
-        this.num = num/gcd;
-        this.denom = denom/gcd;
+        this.num = numFormat(num, denom);
+        this.denom = denomFormat(num, denom);
     }
 
     public Frac (int num) {
@@ -22,6 +17,20 @@ public class Frac {
 
     public Frac () {
         this(0);
+    }
+
+    private int numFormat (int num, int denom) {
+        if(num == 0) return 0;
+        int gcd = gcd(num, denom);
+        if (denom/gcd < 0) return num / gcd * -1;
+        return num / gcd;
+    }
+
+    private int denomFormat (int num, int denom) {
+        if(num == 0) return 1;
+        int gcd = gcd(num, denom);
+        if (denom/gcd < 0) return denom / gcd * -1;
+        return denom / gcd;
     }
 
     private int gcd(int a, int b) {
@@ -33,8 +42,10 @@ public class Frac {
     }
 
     public Frac add(Frac other) {
-        num = num * other.denom + other.num * denom;
-        denom *= other.denom;
+        int newNum = num * other.denom + other.num * denom;
+        int newDenom = denom * other.denom;
+        num = numFormat(newNum, newDenom);
+        denom = denomFormat(newNum, newDenom);
         return this;
     }
 
@@ -43,8 +54,10 @@ public class Frac {
     }
 
     public Frac sub(Frac other) {
-        num = num * other.denom - other.num * denom;
-        denom *= other.denom;
+        int newNum = num * other.denom - other.num * denom;
+        int newDenom = denom * other.denom;
+        num = numFormat(newNum, newDenom);
+        denom = denomFormat(newNum, newDenom);
         return this;
     }
 
@@ -53,34 +66,41 @@ public class Frac {
     }
 
     public Frac mul(Frac other) {
-        num *= other.num;
-        denom *= other.denom;
+        int newNum = num * other.num;
+        int newDenom = denom * other.denom;
+        num = numFormat(newNum, newDenom);
+        denom = denomFormat(newNum, newDenom);
         return this;
     }
 
-    public static Frac div(Frac a, Frac b) {
+    public static Frac div(Frac a, Frac b) throws ArithmeticException{
         if(b.num == 0)
-            throw new ArithmeticException("Cannot divide by zero.");
+            throw new ArithmeticException ("Cannot divide by zero.");
         return new Frac(a.num * b.denom, a.denom * b.num);
     }
 
-    public Frac div(Frac other) {
+    public Frac div(Frac other) throws ArithmeticException {
         if(other.num == 0)
             throw new ArithmeticException("Cannot divide by zero.");
-        num *= other.denom;
-        denom *= other.num;
+        int newNum = num * other.denom;
+        int newDenom = denom * other.num;
+        num = numFormat(newNum, newDenom);
+        denom = denomFormat(newNum, newDenom);
         return this;
     }
 
     @Override
     public int hashCode() {
-        return num/denom + num%denom;
+        return Objects.hash(num, denom);
     }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        return false;
+        if (o == null || getClass() != o.getClass()) return false;
+        Frac frac = (Frac) o;
+        return num == frac.num && denom == frac.denom;
     }
 
     @Override
