@@ -51,9 +51,9 @@ public class MainUsingArgs {
 
         operate(args, stack);
 
-        double expected = (((((5 + 7) * 2)) - 20) / (1 / (double) 4));
+        double expected = ((((5 + 7) * 2)) - 20) / (1 / (double) 4);
 
-        System.out.println("expected = " + expected);
+        System.out.println("((((5 + 7) * 2)) - 20) / (1 / 4) = " + expected);
 
     }
 
