@@ -19,8 +19,7 @@ public class RPNStack {
     }
 
     public boolean empty() {
-        if(top == null) return true;
-        return false;
+        return top == null;
     }
 
     public void clearStack() {

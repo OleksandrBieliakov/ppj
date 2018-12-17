@@ -46,7 +46,7 @@ public class Main {
 
         RPNStack stack = new RPNStack();
 
-        File file = new File("C:\\Projects\\e16p3.txt");
+        File file = new File("data/e16p3.txt");
         BufferedReader br = new BufferedReader(new FileReader(file));
 
         String st;
