@@ -18,13 +18,13 @@ public class MainUsingArgs {
                 case "-": {
                     double pop1 = stack.pop();
                     double pop2 = stack.pop();
-                    stack.push(pop1 - pop2);
+                    stack.push(pop2 - pop1);
                     break;
                 }
                 case "/": {
                     double pop1 = stack.pop();
                     double pop2 = stack.pop();
-                    stack.push(pop1 / pop2);
+                    stack.push(pop2 / pop1);
                     break;
                 }
                 default:
@@ -50,6 +50,10 @@ public class MainUsingArgs {
         RPNStack stack = new RPNStack();
 
         operate(args, stack);
+
+        double expected = (((((5 + 7) * 2)) - 20) / (1 / (double) 4));
+
+        System.out.println("expected = " + expected);
 
     }
 
