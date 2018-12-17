@@ -18,11 +18,11 @@ public class Main {
             } else if (arr[0] == '-') {
                 double pop1 = stack.pop();
                 double pop2 = stack.pop();
-                stack.push(pop1 - pop2);
+                stack.push(pop2 - pop1);
             } else if (arr[0] == '/') {
                 double pop1 = stack.pop();
                 double pop2 = stack.pop();
-                stack.push(pop1 / pop2);
+                stack.push(pop2 / pop1);
             } else {
                 int al = arr.length;
                 double val = 0;
