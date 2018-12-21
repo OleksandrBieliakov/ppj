@@ -10,7 +10,7 @@ public class Car {
         km = 0;
     }
 
-    public void fill() throws  Explosion {
+    public void fill() {
         if(Math.random() <= 0.1) throw new Explosion("BOOOOM");
         fuel += Math.random()*(35-15)+ 15;
         System.out.println("After filling " + fuel);
