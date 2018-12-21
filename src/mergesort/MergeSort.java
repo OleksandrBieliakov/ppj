@@ -11,11 +11,10 @@ public class MergeSort {
         int i2 = 0;
         MAIN_LOOP:
         while (i1 < a1.length) {
-            for (int i = i2; i < a2.length; ++i){
-                if (a2[i] < a1[i1]){
-                    arr[next++] = a2[i];
-                    ++i2;
-                } else if (a2[i] > a1[i1]) {
+            while (i2 < a2.length) {
+                if (a2[i2] <= a1[i1]){
+                    arr[next++] = a2[i2++];
+                } else {
                     arr[next++] = a1[i1++];
                     continue MAIN_LOOP;
                 }
