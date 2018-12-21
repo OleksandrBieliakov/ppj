@@ -1,4 +1,4 @@
-package rocket;
+package additional.rocket;
 
 public class Rocket {
     private Computer computer1;

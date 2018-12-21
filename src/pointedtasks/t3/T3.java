@@ -1,4 +1,4 @@
-package pointedtask.t3;
+package pointedtasks.t3;
 
 import java.io.File;
 import java.io.FileNotFoundException;

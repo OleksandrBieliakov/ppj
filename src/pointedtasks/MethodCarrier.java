@@ -1,3 +1,5 @@
+package pointedtasks;
+
 import java.util.Scanner;
 
 public class MethodCarrier {

@@ -1,4 +1,4 @@
-package pointedtask.t1;
+package pointedtasks.t1;
 
 public class Main {
 

@@ -1,3 +1,5 @@
+package mergesort;
+
 import java.util.Random;
 
 public class MergeSortingFather {

@@ -1,4 +1,4 @@
-package rocket;
+package additional.rocket;
 
 public class ComputerErrorException extends Exception {
     public ComputerErrorException() { }

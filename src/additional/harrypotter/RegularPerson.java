@@ -1,4 +1,4 @@
-package harrypotter;
+package additional.harrypotter;
 
 public class RegularPerson {
 }

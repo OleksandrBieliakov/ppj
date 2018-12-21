@@ -1,4 +1,4 @@
-package pointedtask.t2;
+package pointedtasks.t2;
 
 import java.io.File;
 import java.util.Scanner;
