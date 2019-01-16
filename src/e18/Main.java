@@ -34,45 +34,34 @@ public class Main {
                     lineCount++;
                     erLoc = 0;
                     str = new StringBuilder();
-                    ;
                 } else {
                     str.append((char) read);
                     erLoc++;
                     switch (read) {
-                        case '(': {
+                        case '(':
+                        case '[':
+                        case '{':
                             stack.push((char) read);
                             break;
-                        }
-                        case '[': {
-                            stack.push((char) read);
-                            break;
-                        }
-                        case '{': {
-                            stack.push((char) read);
-                            break;
-                        }
-                        case ')': {
+                        case ')':
                             if (!stack.empty() && ((expected = stack.pop()) != '(')) {
                                 errors.push(erLoc, (char) read, (char) (expected + 2));
                             }
                             break;
-                        }
-                        case ']': {
+                        case ']':
                             if (!stack.empty() && ((expected = stack.pop()) != '[')) {
                                 if (expected == '(') expected++;
                                 else expected += 2;
                                 errors.push(erLoc, (char) read, expected);
                             }
                             break;
-                        }
-                        case '}': {
+                        case '}':
                             if (!stack.empty() && ((expected = stack.pop()) != '{')) {
                                 if (expected == '(') expected++;
                                 else expected += 2;
                                 errors.push(erLoc, (char) read, expected);
                             }
                             break;
-                        }
                     }
                 }
             }
