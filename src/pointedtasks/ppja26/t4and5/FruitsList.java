@@ -1,6 +1,8 @@
 package pointedtasks.ppja26.t4and5;
 
-public class FruitsList {
+import java.io.Serializable;
+
+public class FruitsList implements Serializable {
     private Fruit head;
 
     public void push (String s, int seeds) {
@@ -20,4 +22,11 @@ public class FruitsList {
         return head == null;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        while (!empty())
+            sb.append(pop()).append("\n");
+        return sb.toString();
+    }
 }

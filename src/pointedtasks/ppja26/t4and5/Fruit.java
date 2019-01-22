@@ -1,6 +1,8 @@
 package pointedtasks.ppja26.t4and5;
 
-public class Fruit {
+import java.io.Serializable;
+
+public class Fruit implements Serializable {
 
     private String name;
     private int seedNumber;
