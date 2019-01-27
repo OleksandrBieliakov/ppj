@@ -39,7 +39,7 @@ public class Strings {
             e.printStackTrace();
         }
 
-        list.show();
+        list.toFile(args[0].substring(0, args[0].indexOf(".")));
 
     }
 
