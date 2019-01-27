@@ -50,11 +50,11 @@ public class SingLList {
         return list;
     }
 
-    public void removeOdd() {
+    public void removeOddRecursive() {
         if(empty()) return;
         if(head.data%2 != 0) {
             head = head.next;
-            removeOdd();
+            removeOddRecursive();
             return;
         }
         Node tmp = head;
@@ -65,6 +65,22 @@ public class SingLList {
             else
                 tmp = tmpNext;
             tmpNext = tmpNext.next;
+        }
+    }
+
+    public void removeOdd() {
+        Node prev = null;
+        Node cur = head;
+        while (cur != null) {
+            Node next = cur.next;
+            if (cur.data % 2 != 0)
+                if (prev != null)
+                    prev.next = next;
+                else
+                    head = next;
+            else
+                prev = cur;
+            cur = next;
         }
     }
 
