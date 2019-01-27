@@ -30,25 +30,18 @@ public class List {
         int place = 0;
         Node tmp = head;
         while (tmp != null) {
-            if(tmp.st.equals(st))
-                return;
-            for(int i = 0; i < st.length(); ++i){
-                try {
-                    if (st.charAt(i) > tmp.st.charAt(i)) {
-                        place++;
-                        break;
-                    } else if (st.charAt(i) < tmp.st.charAt(i))
-                        break;
-                } catch (NullPointerException ex){
-                    place++;
-                    break;
-                }
-            }
+            if(tmp.st.equals(st)) return;
+            if (st.compareToIgnoreCase(tmp.st) > 0)
+                place++;
             tmp = tmp.next;
         }
 
+        if(place == 0) {
+            head = new Node(st, head);
+            return;
+        }
         Node tmp2 = head;
-        while ((place - 1) > 0){
+        while ((place - 1 ) > 0){
             tmp2 = tmp2.next;
             place--;
         }
