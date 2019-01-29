@@ -9,6 +9,8 @@ public class T3 {
 
     public static void main(String[]args) {
 
+        //The program reads the file "serverLog" and prints IPv4s found in the file
+
         String s = "";
 
         try {

@@ -7,6 +7,8 @@ import java.util.regex.Pattern;
 public class T2 {
     public static void main(String[]args) {
 
+        // The program validates e-mails
+
         Scanner scanner = new Scanner(System.in);
         String s = scanner.next();
 
