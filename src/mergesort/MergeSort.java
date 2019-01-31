@@ -1,6 +1,7 @@
 package mergesort;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class MergeSort {
 
@@ -39,20 +40,33 @@ public class MergeSort {
         int[] a1 = Arrays.copyOfRange(arr, 0, l/2);
         int[] a2 = Arrays.copyOfRange(arr, l/2, l);
         a1 = splitMerge(a1);
+        /*
         for(int i : a1) {
             System.out.print(i + " ");
         }
         System.out.println();
+        */
         a2 = splitMerge(a2);
+        /*
         for(int i : a2) {
             System.out.print(i + " ");
         }
         System.out.println();
+        */
         return sortMerge(a1, a2);
     }
 
     public static void main (String[] args) {
-        int[] arr = {2,5,6,3,8,9,6,1,0,5};
+
+        //int[] arr = new int[]{5, 7, 1, 9, 8, 2, 4, 6, 3, 7};
+
+        Random r = new Random();
+        int[] arr = new int[100];
+
+        for(int i = 0; i < arr.length; ++i) {
+            arr[i] = r.nextInt(101);
+        }
+
         for(int i : arr) {
             System.out.print(i + " ");
         }
