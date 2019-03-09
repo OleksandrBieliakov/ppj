@@ -3,8 +3,10 @@ package e21;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.stream.Collectors;
+
+import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
 
 public class Main2 {
 
@@ -13,7 +15,7 @@ public class Main2 {
 
         System.out.println(
             Files.lines(Paths.get("data/task21.txt"))
-                .flatMap(l -> Arrays.stream(l.split("\\W+")))
+                .flatMap(l -> stream(l.split("\\W+")))
                 .map(String::length)
                 .map(c -> {
                     for (int i = 0; i < lim.length; i++)
@@ -21,7 +23,7 @@ public class Main2 {
                             return i;
                     return lim.length;
                 })
-                .collect(Collectors.groupingBy(c -> c, Collectors.counting()))
+                .collect(groupingBy(c -> c, counting()))
                 .values()
         );
     }
