@@ -17,18 +17,32 @@ public class Car {
         next = null;
     }
 
-    public String getMake() {return make;}
-    public int getPrice() {return price;}
-    public Car getNext() {return next;}
+    public String getMake() {
+        return make;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public Car getNext() {
+        return next;
+    }
 
     public void showCars() {
-        System.out.print(make + "(" + price + ") ");
-        if(next != null) next.showCars();
+        System.out.print(toString());
+        if (next != null){
+            System.out.print(' ');
+            next.showCars();
+        }
     }
 
     public void showCarsRev() {
-        if(next != null) next.showCarsRev();
-        System.out.print(make + "(" + price + ") ");
+        if (next != null) {
+            next.showCarsRev();
+            System.out.print(' ');
+        }
+        System.out.print(toString());
     }
 
     @Override

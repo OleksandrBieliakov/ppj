@@ -1,7 +1,7 @@
 package gui.werner.e01.p1;
 
 public class Main {
-    public static void main (String[] args) {
+    public static void main(String[] args) {
         Person john = new Person("John");
         john.buys("Ford", 20000)
                 .buys("Opel", 16000)
@@ -32,7 +32,5 @@ public class Main {
                 bob.getTotalPrice());
         System.out.println(bob.getName() + "'s most " +
                 "expensive car is " + bob.mostExpensive());
-
-
     }
 }

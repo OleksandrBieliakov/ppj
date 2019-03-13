@@ -9,17 +9,20 @@ public class Person {
     }
 
     public Person buys(String make, int price) {
-        if(car == null) car = new Car(make, price);
+        if (car == null) car = new Car(make, price);
         else car = new Car(make, price, car);
         return this;
     }
 
-    public String getName() {return name;}
+    public String getName() {
+        return name;
+    }
 
     public void showCars() {
         if (car != null) car.showCars();
         else System.out.print("No cars owned");
     }
+
     public void showCarsRev() {
         if (car != null) car.showCarsRev();
         else System.out.print("No cars owned");
@@ -38,7 +41,7 @@ public class Person {
     public boolean hasCar(String make) {
         Car tmp = car;
         while (tmp != null) {
-            if(tmp.getMake().equalsIgnoreCase(make))
+            if (tmp.getMake().equalsIgnoreCase(make))
                 return true;
             tmp = tmp.getNext();
         }
@@ -47,16 +50,13 @@ public class Person {
 
     public Car mostExpensive() {
         Car mostExp = null;
-        int price = 0;
         Car tmp = car;
         while (tmp != null) {
-            if(tmp.getPrice() > price) {
+            if (mostExp == null || tmp.getPrice() > mostExp.getPrice()) {
                 mostExp = tmp;
-                price = mostExp.getPrice();
             }
             tmp = tmp.getNext();
         }
         return mostExp;
     }
-
 }
