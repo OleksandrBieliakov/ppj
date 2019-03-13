@@ -62,7 +62,8 @@ public class Main {
         A_Type t1 = new A_Type('(' , ')');
         A_Type t2 = new A_Type('[', ']');
         A_Type t3 = new A_Type('{' , '}');
-        int line = 1;
+        A_Type[] types = {t1, t2, t3};
+         int line = 1;
         int position = 0;
 
 
@@ -72,28 +73,18 @@ public class Main {
             int ch;
             while((ch = br.read()) != -1) {
                 ++position;
-                switch ((char)ch) {
-                    case '(':
-                        stack.push(t1);
+                for(A_Type t : types) {
+                    if((char)ch == t.getPar1()){
+                        stack.push(t);
                         break;
-                    case '[':
-                        stack.push(t2);
+                    } else if((char)ch == t.getPar2()) {
+                        checkError(file, stack, line, position, t);
                         break;
-                    case '{':
-                        stack.push(t3);
-                        break;
-                    case ')':
-                        checkError(file, stack, line, position, t1);
-                        break;
-                    case ']':
-                        checkError(file, stack, line, position, t2);
-                        break;
-                    case '}':
-                        checkError(file, stack, line, position, t3);
-                        break;
-                    case '\n':
-                        ++line;
-                        position = 0;
+                    }
+                }
+                if((char)ch == '\n') {
+                    ++line;
+                    position = 0;
                 }
             }
         } catch (IOException e) {
