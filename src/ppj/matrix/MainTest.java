@@ -52,7 +52,7 @@ public class MainTest {
                         a[tmp][k] = tmp2;
                     }
 
-                    System.out.println("Row swapping: r-" + row + " and r-" + tmp );
+                    System.out.println("Row swapping: r-" + (row+1) + " and r-" + (tmp+1) );
                     print(a);
                 } else continue;
             }
