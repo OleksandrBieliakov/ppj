@@ -18,7 +18,10 @@ public class MainTest {
 
     public static void main(String[] args) {
 
-        double[][] a = {{1, 1, 1, 1}, {2, 3, 4, 4}, {3, 4, 6, 5}};
+        double[][] a = {{1, 2, 2, 3, 1},
+                        {2, 4, 4, 6, 2},
+                        {3, 6, 6, 12, 6},
+                        {1, 2, 4, 5, 3}};
         int rows = a.length;
         int columns = a[0].length;
 
@@ -60,9 +63,9 @@ public class MainTest {
                     for (int m = i; m < columns; ++m) {
                         a[n][m] -= coef * a[row][m];
                     }
+                    System.out.println("Forward: r-" + (n+1) + " c-" + (i+1));
+                    print(a);
                 }
-                System.out.println("Forward: r-" + (n+1) + " c-" + (i+1));
-                print(a);
             }
             ++row;
         }
