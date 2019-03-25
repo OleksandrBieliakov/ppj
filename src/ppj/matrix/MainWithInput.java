@@ -9,10 +9,11 @@ public class MainWithInput {
     // Takes a matrix as an input from console
     private static double[][] input() {
         Scanner scan = new Scanner(System.in);
-        System.out.print("Please enter the number of rows and columns of your matrix." +
-                "\nrows: ");
+        System.out.print("****GAUSSIAN ELIMINATION ALGORITHM****\n" +
+                "Please enter the number of rows and columns of your matrix.\n" +
+                "    rows: ");
         int rows = scan.nextInt();
-        System.out.print("columns: ");
+        System.out.print("    columns: ");
         int columns = scan.nextInt();
         double[][] arr = new double[rows][columns];
         System.out.println("Enter your matrix row by row:");
@@ -128,6 +129,8 @@ public class MainWithInput {
             }
             --row;
         }
+
+        System.out.println("^ Reduced Row Echelon form!");
 
     }
 }
