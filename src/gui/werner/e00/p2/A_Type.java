@@ -1,4 +1,4 @@
-package gui.werner.e01.p2;
+package gui.werner.e00.p2;
 
 public class A_Type {
     private char par1;

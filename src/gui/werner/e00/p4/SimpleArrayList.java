@@ -1,4 +1,4 @@
-package gui.werner.e01.p4;
+package gui.werner.e00.p4;
 
 public class SimpleArrayList {
     private final static int INITIAL_CAPACITY = 5;

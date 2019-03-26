@@ -1,4 +1,4 @@
-package gui.werner.e01.p1;
+package gui.werner.e00.p1;
 
 public class Main {
     public static void main(String[] args) {
