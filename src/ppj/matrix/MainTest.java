@@ -5,9 +5,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 // Gaussian elimination algorithm
 public class MainTest {
+    private static Logger logger = Logger.getLogger(MainTest.class.getName());
 
     // Reads a matrix from text file
     private static double[][] readFile() throws IOException {
@@ -33,7 +35,7 @@ public class MainTest {
 
         columns = stArr[0].split(" ").length;
         if (columns < 2) {
-            System.out.println("Can`t build an equation matrix with data provided in the file.");
+            logger.severe("Can`t build an equation matrix with data provided in the file.");
             throw new IOException();
         }
         double[][] arr = new double[rows][columns];
@@ -46,23 +48,23 @@ public class MainTest {
                 arr[q][e] = Double.parseDouble(stBrr[e]);
             }
         }
-        System.out.println("\nInitial equation matrix:");
-        print(arr);
+        logger.info("\nInitial equation matrix:");
+        logger.info(print(arr));
         return arr;
     }
 
     // Takes a matrix as an input from console
     private static double[][] input() throws IOException {
         Scanner scan = new Scanner(System.in);
-        System.out.print("Please enter the number of rows and columns of your matrix. (0 - to exit)\n" +
+        logger.info("Please enter the number of rows and columns of your matrix. (0 - to exit)\n" +
                 "    rows: ");
         int rows = scan.nextInt();
         if (rows == 0) throw new IOException();
-        System.out.print("    columns: ");
+        logger.info("    columns: ");
         int columns = scan.nextInt();
         if (columns < 2) throw new IOException();
         double[][] arr = new double[rows][columns];
-        System.out.println("Enter your matrix row by row:");
+        logger.info("Enter your matrix row by row:");
         for (int p = 0; p < rows; ++p) {
             for (int u = 0; u < columns; ++u) {
                 arr[p][u] = scan.nextDouble();
@@ -72,21 +74,23 @@ public class MainTest {
     }
 
     // Prints a two-dimentional array
-    private static void print(double[][] a) {
+    private static String print(double[][] a) {
+        StringBuilder sb = new StringBuilder();
         int rows = a.length;
         int columns = a[0].length;
         for (int i = 0; i < rows; ++i) {
             for (int j = 0; j < columns - 1; ++j) {
-                System.out.printf("%3.0f", a[i][j]);
+                sb.append(String.format("%3.0f", a[i][j]));
             }
-            System.out.printf(" |%3.0f%n", a[i][columns - 1]);
+            sb.append(String.format(" |%3.0f%n", a[i][columns - 1]));
         }
-        System.out.println();
+        sb.append('\n');
+        return sb.toString();
     }
 
     public static void main(String[] args) {
 
-        System.out.println("*****GAUSSIAN ELIMINATION ALGORITHM*****");
+        logger.info("*****GAUSSIAN ELIMINATION ALGORITHM*****");
 
         double[][] a = {};
         try {
@@ -95,7 +99,7 @@ public class MainTest {
             try {
                 a = input();
             } catch (IOException ex) {
-                System.out.print("Can`t build an equation matrix with entered values.");
+                logger.severe("Can`t build an equation matrix with entered values.");
                 System.exit(0);
             }
         }
@@ -125,8 +129,8 @@ public class MainTest {
                         a[row][k] = a[tmp][k];
                         a[tmp][k] = tmp2;
                     }
-                    System.out.println("Row swapping: r-" + (row+1) + " and r-" + (tmp+1) );
-                    print(a);
+                    logger.fine("Row swapping: r-" + (row+1) + " and r-" + (tmp+1) );
+                    logger.fine(print(a));
                 } else continue;
             }
             // Elimination
@@ -136,8 +140,8 @@ public class MainTest {
                     for (int m = i; m < columns; ++m) {
                         a[n][m] -= coef * a[row][m];
                     }
-                    System.out.println("Forward: r-" + (n+1) + " c-" + (i+1));
-                    print(a);
+                    logger.fine("Forward: r-" + (n+1) + " c-" + (i+1));
+                    logger.fine(print(a));
                 }
             }
             ++row;
@@ -156,8 +160,8 @@ public class MainTest {
                         for (int x = l; x < columns; ++x) {
                             a[f][x] -= coef * a[h][x];
                         }
-                        System.out.println("Backward: r-" + (f+1) + " c-" + (l+1));
-                        print(a);
+                        logger.fine("Backward: r-" + (f+1) + " c-" + (l+1));
+                        logger.fine(print(a));
                     }
                     break;
                 }
@@ -175,8 +179,8 @@ public class MainTest {
                         for (int z = y; z < columns; ++z) {
                             a[row][z] *= coef;
                         }
-                        System.out.println("Scaling: r-" + (row + 1));
-                        print(a);
+                        logger.fine("Scaling: r-" + (row + 1));
+                        logger.fine(print(a));
                     }
                     break;
                 }
@@ -184,7 +188,8 @@ public class MainTest {
             --row;
         }
 
-        System.out.println("^ Reduced Row Echelon form!");
+        logger.info("^ Reduced Row Echelon form!");
+        logger.info(print(a));
 
     }
 }
