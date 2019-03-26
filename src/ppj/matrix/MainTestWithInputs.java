@@ -1,20 +1,66 @@
 package ppj.matrix;
 
-// Gaussian elimination algorithm
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
-public class MainJustResult {
+// Gaussian elimination algorithm
+public class MainTestWithInputs {
+
+    // Reads a matrix from text file
+    private static double[][] readFile() throws IOException {
+        File file = new File("data/ppj/matrix");
+        BufferedReader br = new BufferedReader(new FileReader(file));
+
+        int rows = 0;
+        int columns = 0;
+
+        while (br.readLine() != null) {
+            ++rows;
+        }
+
+        if (rows == 0) throw new IOException();
+
+        String stArr[] = new String[rows];
+        br = new BufferedReader(new FileReader(file));
+        int row = 0;
+        String st;
+        while ((st = br.readLine()) != null) {
+            stArr[row++] = st;
+        }
+
+        columns = stArr[0].split(" ").length;
+        if (columns < 2) {
+            System.out.println("Can`t build an equation matrix with data provided in the file.");
+            throw new IOException();
+        }
+        double[][] arr = new double[rows][columns];
+
+        String[] stBrr;
+
+        for (int q = 0; q < rows; ++q) {
+            stBrr = stArr[q].split(" ");
+            for (int e = 0; e < columns; ++e) {
+                arr[q][e] = Double.parseDouble(stBrr[e]);
+            }
+        }
+        System.out.println("\nInitial equation matrix:");
+        print(arr);
+        return arr;
+    }
 
     // Takes a matrix as an input from console
-    private static double[][] input() {
+    private static double[][] input() throws IOException {
         Scanner scan = new Scanner(System.in);
-        System.out.print("****GAUSSIAN ELIMINATION ALGORITHM****\n" +
-                "Please enter the number of rows and columns of your matrix.\n" +
+        System.out.print("Please enter the number of rows and columns of your matrix. (0 - to exit)\n" +
                 "    rows: ");
         int rows = scan.nextInt();
+        if (rows == 0) throw new IOException();
         System.out.print("    columns: ");
         int columns = scan.nextInt();
+        if (columns < 2) throw new IOException();
         double[][] arr = new double[rows][columns];
         System.out.println("Enter your matrix row by row:");
         for (int p = 0; p < rows; ++p) {
@@ -40,7 +86,19 @@ public class MainJustResult {
 
     public static void main(String[] args) {
 
-        double[][] a = input();
+        System.out.println("*****GAUSSIAN ELIMINATION ALGORITHM*****");
+
+        double[][] a = {};
+        try {
+            a = readFile();
+        } catch (IOException e) {
+            try {
+                a = input();
+            } catch (IOException ex) {
+                System.out.print("Can`t build an equation matrix with entered values.");
+                System.exit(0);
+            }
+        }
         int rows = a.length;
         int columns = a[0].length;
 
@@ -67,6 +125,8 @@ public class MainJustResult {
                         a[row][k] = a[tmp][k];
                         a[tmp][k] = tmp2;
                     }
+                    System.out.println("Row swapping: r-" + (row+1) + " and r-" + (tmp+1) );
+                    print(a);
                 } else continue;
             }
             // Elimination
@@ -76,6 +136,8 @@ public class MainJustResult {
                     for (int m = i; m < columns; ++m) {
                         a[n][m] -= coef * a[row][m];
                     }
+                    System.out.println("Forward: r-" + (n+1) + " c-" + (i+1));
+                    print(a);
                 }
             }
             ++row;
@@ -94,6 +156,8 @@ public class MainJustResult {
                         for (int x = l; x < columns; ++x) {
                             a[f][x] -= coef * a[h][x];
                         }
+                        System.out.println("Backward: r-" + (f+1) + " c-" + (l+1));
+                        print(a);
                     }
                     break;
                 }
@@ -111,6 +175,8 @@ public class MainJustResult {
                         for (int z = y; z < columns; ++z) {
                             a[row][z] *= coef;
                         }
+                        System.out.println("Scaling: r-" + (row + 1));
+                        print(a);
                     }
                     break;
                 }
@@ -118,8 +184,7 @@ public class MainJustResult {
             --row;
         }
 
-        System.out.println("Reduced Row Echelon form:");
-        print(a);
+        System.out.println("^ Reduced Row Echelon form!");
 
     }
 }

@@ -46,6 +46,7 @@ public class MainFromFile {
                 arr[q][e] = Double.parseDouble(stBrr[e]);
             }
         }
+        System.out.println("\nInitial equation matrix:");
         print(arr);
         return arr;
     }
@@ -85,7 +86,7 @@ public class MainFromFile {
 
     public static void main(String[] args) {
 
-        System.out.println("****GAUSSIAN ELIMINATION ALGORITHM****");
+        System.out.println("*****GAUSSIAN ELIMINATION ALGORITHM*****");
 
         double[][] a = {};
         try {
