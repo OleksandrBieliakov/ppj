@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 // Gaussian elimination algorithm
-public class MainFromFile {
+public class MainJustResult {
 
     // Reads a matrix from text file
     private static double[][] readFile() throws IOException {
