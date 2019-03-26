@@ -1,13 +1,12 @@
 package ppj.matrix;
 
-// Gaussian elimination algorithm
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+// Gaussian elimination algorithm
 public class MainFromFile {
 
     // Reads a matrix from text file
@@ -33,6 +32,10 @@ public class MainFromFile {
         }
 
         columns = stArr[0].split(" ").length;
+        if (columns < 2) {
+            System.out.println("Can`t build an equation matrix with data provided in the file.");
+            throw new IOException();
+        }
         double[][] arr = new double[rows][columns];
 
         String[] stBrr;
@@ -48,13 +51,15 @@ public class MainFromFile {
     }
 
     // Takes a matrix as an input from console
-    private static double[][] input() {
+    private static double[][] input() throws IOException {
         Scanner scan = new Scanner(System.in);
-        System.out.print("Please enter the number of rows and columns of your matrix.\n" +
+        System.out.print("Please enter the number of rows and columns of your matrix. (0 - to exit)\n" +
                 "    rows: ");
         int rows = scan.nextInt();
+        if (rows == 0) throw new IOException();
         System.out.print("    columns: ");
         int columns = scan.nextInt();
+        if (columns < 2) throw new IOException();
         double[][] arr = new double[rows][columns];
         System.out.println("Enter your matrix row by row:");
         for (int p = 0; p < rows; ++p) {
@@ -82,11 +87,16 @@ public class MainFromFile {
 
         System.out.println("****GAUSSIAN ELIMINATION ALGORITHM****");
 
-        double[][] a;
+        double[][] a = {};
         try {
             a = readFile();
         } catch (IOException e) {
-            a = input();
+            try {
+                a = input();
+            } catch (IOException ex) {
+                System.out.print("Can`t build an equation matrix with entered values.");
+                System.exit(0);
+            }
         }
         int rows = a.length;
         int columns = a[0].length;
