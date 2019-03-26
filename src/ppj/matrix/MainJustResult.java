@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 // Gaussian elimination algorithm
-public class MainTest {
+public class MainJustResult {
 
     // Reads a matrix from text file
     private static double[][] readFile() throws IOException {
@@ -125,8 +125,6 @@ public class MainTest {
                         a[row][k] = a[tmp][k];
                         a[tmp][k] = tmp2;
                     }
-                    System.out.println("Row swapping: r-" + (row+1) + " and r-" + (tmp+1) );
-                    print(a);
                 } else continue;
             }
             // Elimination
@@ -136,8 +134,6 @@ public class MainTest {
                     for (int m = i; m < columns; ++m) {
                         a[n][m] -= coef * a[row][m];
                     }
-                    System.out.println("Forward: r-" + (n+1) + " c-" + (i+1));
-                    print(a);
                 }
             }
             ++row;
@@ -156,8 +152,6 @@ public class MainTest {
                         for (int x = l; x < columns; ++x) {
                             a[f][x] -= coef * a[h][x];
                         }
-                        System.out.println("Backward: r-" + (f+1) + " c-" + (l+1));
-                        print(a);
                     }
                     break;
                 }
@@ -175,8 +169,6 @@ public class MainTest {
                         for (int z = y; z < columns; ++z) {
                             a[row][z] *= coef;
                         }
-                        System.out.println("Scaling: r-" + (row + 1));
-                        print(a);
                     }
                     break;
                 }
@@ -184,7 +176,9 @@ public class MainTest {
             --row;
         }
 
-        System.out.println("^ Reduced Row Echelon form!");
+        System.out.println("Reduced Row Echelon form:");
+        print(a);
 
     }
 }
+

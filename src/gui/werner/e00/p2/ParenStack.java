@@ -1,4 +1,4 @@
-package gui.werner.e01.p2;
+package gui.werner.e00.p2;
 
 public class ParenStack {
     private Node top;
