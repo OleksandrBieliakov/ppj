@@ -1,7 +1,75 @@
 package ppj.matrix;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+
 // Gaussian elimination algorithm
 public class MainTest {
+
+    // Reads a matrix from text file
+    private static double[][] readFile() throws IOException {
+        File file = new File("data/ppj/matrix");
+        BufferedReader br = new BufferedReader(new FileReader(file));
+
+        int rows = 0;
+        int columns = 0;
+
+        while (br.readLine() != null) {
+            ++rows;
+        }
+
+        if (rows == 0) throw new IOException();
+
+        String stArr[] = new String[rows];
+        br = new BufferedReader(new FileReader(file));
+        int row = 0;
+        String st;
+        while ((st = br.readLine()) != null) {
+            stArr[row++] = st;
+        }
+
+        columns = stArr[0].split(" ").length;
+        if (columns < 2) {
+            System.out.println("Can`t build an equation matrix with data provided in the file.");
+            throw new IOException();
+        }
+        double[][] arr = new double[rows][columns];
+
+        String[] stBrr;
+
+        for (int q = 0; q < rows; ++q) {
+            stBrr = stArr[q].split(" ");
+            for (int e = 0; e < columns; ++e) {
+                arr[q][e] = Double.parseDouble(stBrr[e]);
+            }
+        }
+        System.out.println("\nInitial equation matrix:");
+        print(arr);
+        return arr;
+    }
+
+    // Takes a matrix as an input from console
+    private static double[][] input() throws IOException {
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Please enter the number of rows and columns of your matrix. (0 - to exit)\n" +
+                "    rows: ");
+        int rows = scan.nextInt();
+        if (rows == 0) throw new IOException();
+        System.out.print("    columns: ");
+        int columns = scan.nextInt();
+        if (columns < 2) throw new IOException();
+        double[][] arr = new double[rows][columns];
+        System.out.println("Enter your matrix row by row:");
+        for (int p = 0; p < rows; ++p) {
+            for (int u = 0; u < columns; ++u) {
+                arr[p][u] = scan.nextDouble();
+            }
+        }
+        return arr;
+    }
 
     // Prints a two-dimentional array
     private static void print(double[][] a) {
@@ -18,15 +86,21 @@ public class MainTest {
 
     public static void main(String[] args) {
 
-        double[][] a = {{1, 2, 2, 3, 1},
-                        {2, 4, 4, 6, 2},
-                        {3, 6, 6, 12, 6},
-                        {1, 2, 4, 5, 3}};
+        System.out.println("*****GAUSSIAN ELIMINATION ALGORITHM*****");
+
+        double[][] a = {};
+        try {
+            a = readFile();
+        } catch (IOException e) {
+            try {
+                a = input();
+            } catch (IOException ex) {
+                System.out.print("Can`t build an equation matrix with entered values.");
+                System.exit(0);
+            }
+        }
         int rows = a.length;
         int columns = a[0].length;
-
-        System.out.println("Start:");
-        print(a);
 
         int row = 0;
         double coef;
@@ -51,7 +125,6 @@ public class MainTest {
                         a[row][k] = a[tmp][k];
                         a[tmp][k] = tmp2;
                     }
-
                     System.out.println("Row swapping: r-" + (row+1) + " and r-" + (tmp+1) );
                     print(a);
                 } else continue;
@@ -79,7 +152,7 @@ public class MainTest {
                 if (a[h][l] != 0) {
                     // Elimination
                     for (int f = h - 1; f >= 0; --f) {
-                        coef = a[f][l]/a[h][l];
+                        coef = a[f][l] / a[h][l];
                         for (int x = l; x < columns; ++x) {
                             a[f][x] -= coef * a[h][x];
                         }
@@ -97,7 +170,7 @@ public class MainTest {
             for (int y = 0; y < columns; ++y) {
                 if (a[row][y] != 0) {
                     // Scaling
-                    if(a[row][y] != 1) {
+                    if (a[row][y] != 1) {
                         coef = 1 / a[row][y];
                         for (int z = y; z < columns; ++z) {
                             a[row][z] *= coef;
@@ -110,6 +183,8 @@ public class MainTest {
             }
             --row;
         }
+
+        System.out.println("^ Reduced Row Echelon form!");
 
     }
 }
