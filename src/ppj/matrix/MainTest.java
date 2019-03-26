@@ -41,7 +41,7 @@ public class MainTest {
         String[] stBrr;
 
         for (int q = 0; q < rows; ++q) {
-            stBrr = stArr[q].split(" ");
+            stBrr = stArr[q].split("\\s+");
             for (int e = 0; e < columns; ++e) {
                 arr[q][e] = Double.parseDouble(stBrr[e]);
             }
