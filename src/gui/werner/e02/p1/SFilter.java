@@ -1,23 +1,20 @@
 package gui.werner.e02.p1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @FunctionalInterface
 public interface SFilter {
 
     boolean test(String s);
 
     static String[] filter(String[] arr, SFilter filt) {
-        int count = 0;
-        for (String st : arr) {
-            if (filt.test(st))
-                ++count;
+        List<String> list =  new ArrayList<>();
+        for (String s : arr) {
+            if (filt.test(s))
+                list.add(s);
         }
-        String[] filtered = new String[count];
-        count = 0;
-        for (String st : arr) {
-            if (filt.test(st))
-                filtered[count++] = st;
-        }
-        return filtered;
+        return list.toArray(new String[0]);
     }
 
 }
