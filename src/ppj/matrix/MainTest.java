@@ -11,7 +11,7 @@ public class MainTest {
 
     // Reads a matrix from text file
     private static double[][] readFile() throws IOException {
-        File file = new File("data/ppj/matrix");
+        File file = new File("data/ppj/matrix7");
         BufferedReader br = new BufferedReader(new FileReader(file));
 
         int rows = 0;
@@ -54,7 +54,7 @@ public class MainTest {
     // Takes a matrix as an input from console
     private static double[][] input() throws IOException {
         Scanner scan = new Scanner(System.in);
-        System.out.print("Please enter the number of rows and columns of your matrix. (0 - to exit)\n" +
+        System.out.print("Please enter the number of rows and columns of your matrix.\n" +
                 "    rows: ");
         int rows = scan.nextInt();
         if (rows == 0) throw new IOException();
@@ -86,19 +86,32 @@ public class MainTest {
 
     public static void main(String[] args) {
 
-        System.out.println("*****GAUSSIAN ELIMINATION ALGORITHM*****");
+        System.out.println("*****GAUSSIAN ELIMINATION ALGORITHM*****\n" +
+                           "      (implemented by O.Bieliakov)");
 
         double[][] a = {};
+
         try {
             a = readFile();
         } catch (IOException e) {
+            System.out.println("Create a text file named \"matrix.txt\" in a same folder with the program file, " +
+                    "enter a rectangular matrix in it\ne.g. 1 -2 3.5 6\n     -4.1 0 0 1\n     20 3 4 99\n" +
+                    "and press ENTER or just press ENTER and continue with console input.");
+            Scanner scan = new Scanner(System.in);
+            System.out.print(scan.nextLine());
+
             try {
-                a = input();
-            } catch (IOException ex) {
-                System.out.print("Can`t build an equation matrix with entered values.");
-                System.exit(0);
+                a = readFile();
+            } catch (IOException e1) {
+                try {
+                    a = input();
+                } catch (IOException e2) {
+                    System.out.print("Can`t build an equation matrix with entered values.");
+                    System.exit(0);
+                }
             }
         }
+
         int rows = a.length;
         int columns = a[0].length;
 
