@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 // Gaussian elimination algorithm
@@ -11,7 +12,7 @@ public class MainTest {
 
     // Reads a matrix from text file
     private static double[][] readFile() throws IOException {
-        File file = new File("data/ppj/matrix7");
+        File file = new File("data/ppj/matrix");
         BufferedReader br = new BufferedReader(new FileReader(file));
 
         int rows = 0;
@@ -53,9 +54,9 @@ public class MainTest {
 
     // Takes a matrix as an input from console
     private static double[][] input() throws IOException {
-        Scanner scan = new Scanner(System.in);
         System.out.print("Please enter the number of rows and columns of your matrix.\n" +
                 "    rows: ");
+        Scanner scan = new Scanner(System.in);
         int rows = scan.nextInt();
         if (rows == 0) throw new IOException();
         System.out.print("    columns: ");
@@ -71,15 +72,16 @@ public class MainTest {
         return arr;
     }
 
-    // Prints a two-dimentional array
+    // Prints a two-dimentional array with formatting
     private static void print(double[][] a) {
         int rows = a.length;
         int columns = a[0].length;
+        DecimalFormat df = new DecimalFormat("#.#");
         for (int i = 0; i < rows; ++i) {
             for (int j = 0; j < columns - 1; ++j) {
-                System.out.printf("%3.0f", a[i][j]);
+                System.out.printf("%6s", df.format(a[i][j]));
             }
-            System.out.printf(" |%3.0f%n", a[i][columns - 1]);
+            System.out.printf(" |%6s%n", df.format(a[i][columns - 1]));
         }
         System.out.println();
     }
@@ -98,8 +100,7 @@ public class MainTest {
                     "enter a rectangular matrix in it\ne.g. 1 -2 3.5 6\n     -4.1 0 0 1\n     20 3 4 99\n" +
                     "and press ENTER or just press ENTER and continue with console input.");
             Scanner scan = new Scanner(System.in);
-            System.out.print(scan.nextLine());
-
+            scan.nextLine();
             try {
                 a = readFile();
             } catch (IOException e1) {
@@ -197,7 +198,7 @@ public class MainTest {
             --row;
         }
 
-        System.out.println("^ Reduced Row Echelon form!");
+        System.out.println("^ Reduced Row Echelon form!\n");
 
     }
 }
