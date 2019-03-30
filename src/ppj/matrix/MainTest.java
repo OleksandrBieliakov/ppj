@@ -12,7 +12,7 @@ public class MainTest {
 
     // Reads a matrix from text file
     private static double[][] readFile() throws IOException {
-        File file = new File("data/ppj/matrix");
+        File file = new File("matrix");
         BufferedReader br = new BufferedReader(new FileReader(file));
 
         int rows = 0;
@@ -97,7 +97,7 @@ public class MainTest {
             a = readFile();
         } catch (IOException e) {
             System.out.println("Create a text file named \"matrix.txt\" in a same folder with the program file, " +
-                    "enter a rectangular matrix in it\ne.g. 1 -2 3.5 6\n     -4.1 0 0 1\n     20 3 4 99\n" +
+                    "enter a rectangular matrix in it and save it\ne.g. 1 -2 3.5 6\n     -4.1 0 0 1\n     20 3 4 99\n" +
                     "and press ENTER or just press ENTER and continue with console input.");
             Scanner scan = new Scanner(System.in);
             scan.nextLine();
