@@ -12,7 +12,7 @@ public class MainTest {
 
     // Reads a matrix from text file
     private static double[][] readFile() throws IOException {
-        File file = new File("matrix");
+        File file = new File("data/ppj/matrix");
         BufferedReader br = new BufferedReader(new FileReader(file));
 
         int rows = 0;
@@ -89,7 +89,7 @@ public class MainTest {
     public static void main(String[] args) {
 
         System.out.println("*****GAUSSIAN ELIMINATION ALGORITHM*****\n" +
-                           "      (implemented by O.Bieliakov)");
+                "      (implemented by O.Bieliakov)");
 
         double[][] a = {};
 
@@ -139,7 +139,7 @@ public class MainTest {
                         a[row][k] = a[tmp][k];
                         a[tmp][k] = tmp2;
                     }
-                    System.out.println("Row swapping: r-" + (row+1) + " and r-" + (tmp+1) );
+                    System.out.println("Row swapping: r-" + (row + 1) + " and r-" + (tmp + 1));
                     print(a);
                 } else continue;
             }
@@ -150,7 +150,7 @@ public class MainTest {
                     for (int m = i; m < columns; ++m) {
                         a[n][m] -= coef * a[row][m];
                     }
-                    System.out.println("Forward: r-" + (n+1) + " c-" + (i+1));
+                    System.out.println("Forward: r-" + (n + 1) + " c-" + (i + 1));
                     print(a);
                 }
             }
@@ -170,7 +170,7 @@ public class MainTest {
                         for (int x = l; x < columns; ++x) {
                             a[f][x] -= coef * a[h][x];
                         }
-                        System.out.println("Backward: r-" + (f+1) + " c-" + (l+1));
+                        System.out.println("Backward: r-" + (f + 1) + " c-" + (l + 1));
                         print(a);
                     }
                     break;
