@@ -21,7 +21,6 @@ public class Main {
             name = scan.nextLine();
             try {
                 year = scan.nextLine();
-
                 list.add(new Person(name, Integer.parseInt(year)));
             } catch (Exception e) {
                 System.out.println("Year of birth must be an integer.\n" +
