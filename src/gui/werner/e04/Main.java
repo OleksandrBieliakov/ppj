@@ -1,7 +1,5 @@
 package gui.werner.e04;
 
-import ppj.werner.e11.p1.Person;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
