@@ -3,6 +3,7 @@ package gui.werner.e04;
 import ppj.werner.e11.p1.Person;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -11,7 +12,7 @@ public class Main {
 
         Scanner scan = new Scanner(System.in);
 
-        ArrayList<Person> list = new ArrayList<>();
+        List<Person> list = new ArrayList<>();
 
         String name;
         String year;
@@ -26,7 +27,7 @@ public class Main {
                 System.out.print("Year: ");
                 year = scan.nextLine();
                 list.add(new Person(name, Integer.parseInt(year)));
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 System.out.println("Year of birth must be an integer.\n" +
                         "Please enter name and year again.");
                 continue;
@@ -35,6 +36,7 @@ public class Main {
         }
 
         System.out.println(list);
+        System.out.println(Person.findInColl(list, "Joe", 33));
 
     }
 
