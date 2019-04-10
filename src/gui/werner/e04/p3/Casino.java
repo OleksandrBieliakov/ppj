@@ -7,12 +7,12 @@ public class Casino implements Iterable<Integer> {
         return new CasinoIterator();
     }
 
-    class CasinoIterator implements Iterator<Integer> {
+    static class CasinoIterator implements Iterator<Integer> {
         int min = 3, a, b, c;
 
         @Override
         public boolean hasNext() {
-            return min-- > 0 || a != b || a != c || b != c;
+            return min-- > 0 || a != b || a != c;
         }
 
         @Override
