@@ -1,4 +1,4 @@
-package gui.werner.e04;
+package gui.werner.e04.p1;
 
 import java.util.Collection;
 
