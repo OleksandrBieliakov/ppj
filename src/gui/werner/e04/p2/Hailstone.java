@@ -4,32 +4,31 @@ import java.util.Iterator;
 
 public class Hailstone implements Iterable<Integer> {
     private int a;
+    private boolean isNext = true;
 
     public Hailstone(int a) {
         this.a = a;
     }
 
     public Iterator<Integer> iterator() {
-        return new HailstoneIterator(a);
+        return new HailstoneIterator();
     }
 
     class HailstoneIterator implements Iterator<Integer> {
-        private int a;
-
-        HailstoneIterator(int a) {
-            this.a = a;
-        }
 
         @Override
         public boolean hasNext() {
-            System.out.print(a + " ");
-            return a > 1;
+            return isNext;
         }
 
         @Override
         public Integer next() {
-            if (a % 2 == 0) return a /= 2;
-            return a = a * 3 + 1;
+            System.out.print(a + " ");
+            if (a == 1)
+                isNext = false;
+            else
+                a = a % 2 == 0 ? a / 2 : a * 3 + 1;
+            return a;
         }
     }
 
