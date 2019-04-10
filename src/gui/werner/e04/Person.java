@@ -2,7 +2,7 @@ package gui.werner.e04;
 
 import java.util.Collection;
 
-public class Person {
+public class Person implements Comparable<Person> {
     private String name;
     private int yearOfBirth;
 
@@ -30,5 +30,12 @@ public class Person {
     @Override
     public int hashCode() {
         return 17 * name.hashCode() + yearOfBirth;
+    }
+
+    @Override
+    public int compareTo(Person other) {
+        int diff = yearOfBirth - other.yearOfBirth;
+        if (diff != 0) return diff;
+        return name.compareTo(other.name);
     }
 }

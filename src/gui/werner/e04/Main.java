@@ -1,8 +1,6 @@
 package gui.werner.e04;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -35,6 +33,12 @@ public class Main {
 
         System.out.println(list);
         System.out.println(Person.findInColl(list, "Joe", 33));
+
+        Set<Person> hash = new HashSet<>(list);
+        System.out.println(Person.findInColl(hash, "Joe", 33));
+
+        Set<Person> tree = new TreeSet<>(list);
+        System.out.println(Person.findInColl(tree, "Joe", 33));
 
     }
 
