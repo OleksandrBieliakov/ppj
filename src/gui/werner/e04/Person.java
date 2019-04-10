@@ -23,12 +23,12 @@ public class Person {
     @Override
     public boolean equals(Object other) {
         if (other == null || getClass() != other.getClass()) return false;
-        Person p = (Person)other;
+        Person p = (Person) other;
         return name.equals(p.name) && yearOfBirth == p.yearOfBirth;
     }
 
     @Override
     public int hashCode() {
-        return 17*name.hashCode() + yearOfBirth;
+        return 17 * name.hashCode() + yearOfBirth;
     }
 }
