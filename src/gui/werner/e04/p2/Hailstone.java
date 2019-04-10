@@ -11,25 +11,22 @@ public class Hailstone implements Iterable<Integer> {
     }
 
     public Iterator<Integer> iterator() {
-        return new HailstoneIterator();
-    }
+        return new Iterator<Integer>() {
+            @Override
+            public boolean hasNext() {
+                return isNext;
+            }
 
-    class HailstoneIterator implements Iterator<Integer> {
-
-        @Override
-        public boolean hasNext() {
-            return isNext;
-        }
-
-        @Override
-        public Integer next() {
-            System.out.print(a + " ");
-            if (a == 1)
-                isNext = false;
-            else
-                a = a % 2 == 0 ? a / 2 : a * 3 + 1;
-            return a;
-        }
+            @Override
+            public Integer next() {
+                System.out.print(a + " ");
+                if (a == 1)
+                    isNext = false;
+                else
+                    a = a % 2 == 0 ? a / 2 : a * 3 + 1;
+                return a;
+            }
+        };
     }
 
 }
