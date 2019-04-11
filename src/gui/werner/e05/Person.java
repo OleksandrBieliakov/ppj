@@ -25,7 +25,7 @@ public class Person {
     public static List<Car> findAllCars(List<Person> list) {
         List<Car> cars = new ArrayList<>();
         for (Person p : list) {
-            cars.add(p.car);
+            if(p.car != null) cars.add(p.car);
         }
         return cars;
     }
