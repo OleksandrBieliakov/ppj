@@ -2,22 +2,16 @@ package gui.kaboom.l3.t1;
 
 public class Main2 {
 
-    private static double doHardWork() {
-        double dummy = 0.0;
-        for (int i = 0; i < 1000; i++) {
-            dummy += i;
-        }
-        return dummy;
-    }
-
     public static void main(String[] args) {
-        createThread("Evens", 0, 2).start();
-        createThread("Odds ", 1, 2).start();
-        createThread("All  ", 0, 1).start();
+        int numOfThreads = 10;
+        for (int i = 0; i < numOfThreads; i++) {
+            createThread(String.valueOf(i + 1), i, numOfThreads);
+        }
+        createThread("A", 0, 1);
     }
 
-    private static Thread createThread(String title, int from, int step) {
-        return new Thread(() -> {
+    private static void createThread(String title, int from, int step) {
+        new Thread(() -> {
             long start = System.currentTimeMillis();
             long c = 0;
             double x = 0.0;
@@ -31,6 +25,15 @@ public class Main2 {
                     x -= doHardWork();
             }
             System.out.println(title + " : " + c + " : " + x + " : " + (System.currentTimeMillis() - start));
-        });
+        }).start();
     }
+
+    private static double doHardWork() {
+        double dummy = 0.0;
+        for (int i = 0; i < 1000; i++) {
+            dummy += i;
+        }
+        return dummy;
+    }
+
 }
