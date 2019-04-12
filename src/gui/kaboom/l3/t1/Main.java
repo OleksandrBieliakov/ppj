@@ -2,7 +2,7 @@ package gui.kaboom.l3.t1;
 
 public class Main {
     public static void main (String[] args) {
-
+        /*
         long start = System.currentTimeMillis();
         long finish;
         for(int i = 0; i <= 1000000; ++i)
@@ -11,11 +11,11 @@ public class Main {
         System.out.println("\nLoop: " + finish);
 
 
-        /*
+        */
         new Thread(() -> {
             long start1 = System.currentTimeMillis();
             for(int i = 0; i <= 1000000; i += 2)
-                System.out.print(i + " ");
+                System.err.print(i + " ");
             System.out.println("\nEvens: " + (System.currentTimeMillis()-start1));
         }).start();
 
@@ -25,7 +25,6 @@ public class Main {
                 System.out.print(i + " ");
             System.out.println("\nOdds: " + (System.currentTimeMillis()-start2));
         }).start();
-        */
 
     }
 }
