@@ -1,4 +1,4 @@
-package gui.kaboom.l3.t3;
+package gui.kaboom.les03.t3;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package gui.kaboom.l0;
+package gui.kaboom.les00;
 
 public class Student extends Person {
 

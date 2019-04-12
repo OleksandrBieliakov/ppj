@@ -1,4 +1,4 @@
-package gui.kaboom.l3.t1;
+package gui.kaboom.les03.t1;
 
 public class Main2 {
 

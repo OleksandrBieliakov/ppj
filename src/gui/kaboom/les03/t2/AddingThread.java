@@ -1,4 +1,4 @@
-package gui.kaboom.l3.t2;
+package gui.kaboom.les03.t2;
 
 public class AddingThread extends Thread {
 
