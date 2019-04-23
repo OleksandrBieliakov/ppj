@@ -166,12 +166,14 @@ public class MainTest {
                 if (a[h][l] != 0) {
                     // Elimination
                     for (int f = h - 1; f >= 0; --f) {
-                        coef = a[f][l] / a[h][l];
-                        for (int x = l; x < columns; ++x) {
-                            a[f][x] -= coef * a[h][x];
+                        if(a[f][l] != 0) {
+                            coef = a[f][l] / a[h][l];
+                            for (int x = l; x < columns; ++x) {
+                                a[f][x] -= coef * a[h][x];
+                            }
+                            System.out.println("Backward: r-" + (f + 1) + " c-" + (l + 1));
+                            print(a);
                         }
-                        System.out.println("Backward: r-" + (f + 1) + " c-" + (l + 1));
-                        print(a);
                     }
                     break;
                 }
