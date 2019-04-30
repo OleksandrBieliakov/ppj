@@ -10,18 +10,17 @@ class Letters implements Iterable<Thread>{
         int len = s.length();
         threads = new Thread[len];
         for(int i = 0; i < len; i++) {
-            threads[i] = new Thread(Character.toString(s.charAt(i))) {
-                public void run() {
+            char c = s.charAt(i);
+            threads[i] = new Thread(() -> {
                     while(true) {
                         try {
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
                             return;
                         }
-                        System.out.print(getName());
+                        System.out.print(c);
                     }
-                }
-            };
+                }, "Thread " + c);
         }
     }
 
