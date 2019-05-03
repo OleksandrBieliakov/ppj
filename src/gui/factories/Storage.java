@@ -14,9 +14,9 @@ class Storage extends JFrame {
         panel = new StoragePanel();
         setSize(1000, 1000);
         setLocationRelativeTo(null);
+        setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         add(panel);
-        setVisible(true);
     }
 
     void addBaloon(Baloon baloon) {

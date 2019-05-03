@@ -9,7 +9,7 @@ class StoragePanel extends JPanel {
     private LinkedList<Baloon> baloons;
 
     StoragePanel() {
-        this.setBackground(Color.DARK_GRAY);
+        setBackground(Color.DARK_GRAY);
         baloons = new LinkedList<>();
     }
 
