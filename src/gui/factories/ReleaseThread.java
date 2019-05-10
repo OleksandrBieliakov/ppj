@@ -1,6 +1,7 @@
 package gui.factories;
 
 import javax.swing.*;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class ReleaseThread extends Thread {
@@ -17,17 +18,17 @@ public class ReleaseThread extends Thread {
 
     private void altitudeWork() {
         int altitude;
-        for (int i = 0; i < sz; ++i) {
-            altitude = baloons.get(i).getAltitude() + 1;
-            if (altitude >= 500 && !baloons.get(i).isRed()) {
-                baloons.remove(baloons.get(i--));
-                sz--;
-            } else if (altitude >= 750) {
-                baloons.remove(baloons.get(i--));
+        Iterator<Baloon> iterator = baloons.iterator();
+        while (iterator.hasNext()) {
+            Baloon baloon =  iterator.next();
+            altitude = baloon.getAltitude() + 1;
+            if (altitude >= 500 && !baloon.isRed() || altitude >= 750) {
+                iterator.remove();
                 sz--;
             } else {
-                baloons.get(i).setAltitude(altitude);
+                baloon.setAltitude(altitude);
             }
+
         }
     }
 
