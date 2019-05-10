@@ -39,15 +39,11 @@ class StoragePanel extends JPanel {
         int positionX, altitudeY;
         frameHeight -= height;
 
-        if(baloons != null) {
-            for (Baloon baloon : baloons) {
-                mainGraphics.setColor(baloon.getColor());
-                positionX = baloon.getPosition() * width;
-                altitudeY = frameHeight - (int) (baloon.getAltitude() * altitudeUnit);
-                mainGraphics.fillOval(positionX, altitudeY, width, height);
-            }
-        } else {
-            System.out.println("Baloons - NULL !!!");
+        for (Baloon baloon : baloons) {
+            mainGraphics.setColor(baloon.getColor());
+            positionX = baloon.getPosition() * width;
+            altitudeY = frameHeight - (int) (baloon.getAltitude() * altitudeUnit);
+            mainGraphics.fillOval(positionX, altitudeY, width, height);
         }
 
         for (Baloon baloon : staticBaloons) {
