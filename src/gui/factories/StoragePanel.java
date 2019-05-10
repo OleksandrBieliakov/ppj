@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;
 
+import static gui.factories.Storage.SIZE;
+
 class StoragePanel extends JPanel {
 
     private LinkedList<Baloon> baloons;
@@ -32,9 +34,17 @@ class StoragePanel extends JPanel {
         super.paintComponent(currentGraphics);
         Graphics2D mainGraphics = (Graphics2D) currentGraphics;
 
+        int frameWidth = getWidth();
         int frameHeight = getHeight();
-        int width = getWidth() / 99;
-        int height = frameHeight / 99 * 2;
+
+        mainGraphics.setColor(Color.GRAY);
+        int half = frameHeight / 2;
+        mainGraphics.drawLine(0, half, frameWidth, half);
+        int quarter = frameHeight / 4;
+        mainGraphics.drawLine(0, quarter, frameWidth, quarter);
+
+        int width = frameWidth / SIZE;
+        int height = frameHeight / SIZE * 2;
         double altitudeUnit = (double)frameHeight / 1000;
         int positionX, altitudeY;
         frameHeight -= height;

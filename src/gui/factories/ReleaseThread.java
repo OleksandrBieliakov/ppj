@@ -4,7 +4,13 @@ import javax.swing.*;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import static gui.factories.Storage.SIZE;
+
 public class ReleaseThread extends Thread {
+
+    private static final int HEIGHT = 1000 / SIZE;
+    private static final int HALF = 500 - HEIGHT;
+    private static final int THREE_QUARTERS = 750 - HEIGHT;
 
     private final LinkedList<Baloon> baloons;
     private final StoragePanel panel;
@@ -22,48 +28,27 @@ public class ReleaseThread extends Thread {
         while (iterator.hasNext()) {
             Baloon baloon =  iterator.next();
             altitude = baloon.getAltitude() + 1;
-            if (altitude >= 500 && !baloon.isRed() || altitude >= 750) {
+            if (altitude >= HALF && !baloon.isRed() || altitude >= THREE_QUARTERS) {
                 iterator.remove();
                 sz--;
             } else {
                 baloon.setAltitude(altitude);
-            }
-
-        }
-    }
-
-    private void altitudeInitial() {
-        int altitude;
-        for(Baloon b : baloons) {
-            altitude = b.getAltitude() + 1;
-            b.setAltitude(altitude);
-            if(altitude == 1) {
-                SwingUtilities.invokeLater(() -> {
-                    panel.load(baloons);
-                });
-                try {
-                    Thread.sleep(40);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                if (altitude < 10) {
+                    return;
                 }
-                SwingUtilities.invokeLater(panel::repaint);
-                altitudeInitial();
-                return;
             }
+
         }
     }
 
     public void run() {
         System.out.println("RELEASE START");
         SwingUtilities.invokeLater(panel::repaint);
-        altitudeInitial();
         while (sz > 0) {
             SwingUtilities.invokeLater(this::altitudeWork);
-            SwingUtilities.invokeLater(() -> {
-                panel.load(baloons);
-            });
+            SwingUtilities.invokeLater(() -> panel.load(baloons));
             try {
-                Thread.sleep(40);
+                Thread.sleep(20);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
