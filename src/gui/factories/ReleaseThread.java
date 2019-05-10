@@ -54,6 +54,7 @@ public class ReleaseThread extends Thread {
 
     public void run() {
         System.out.println("RELEASE START");
+        SwingUtilities.invokeLater(panel::repaint);
         altitudeInitial();
         while (sz > 0) {
             SwingUtilities.invokeLater(this::altitudeWork);
