@@ -22,7 +22,7 @@ class Storage extends JFrame {
     void addBaloon(Baloon baloon) {
         if (size == 99) {
             System.out.println("RELEASE CALL");
-            new ReleaseThread(baloons, panel).start();
+            new ReleaseThread(new LinkedList<>(baloons), panel).start();
             baloons.clear();
             size = 0;
         }

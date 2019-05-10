@@ -24,8 +24,8 @@ class StoragePanel extends JPanel {
 
         int frameHeight = getHeight();
         int width = getWidth() / 99;
-        int height = frameHeight / 99 * 4;
-        double altitudeUnit = frameHeight / 1000;
+        int height = frameHeight / 99 * 3;
+        double altitudeUnit = (double)frameHeight / 1000;
         int positionX, altitudeY;
 
         for (Baloon baloon : baloons) {

@@ -1,5 +1,7 @@
 package gui.factories;
 
+import java.util.Random;
+
 class Factory extends Thread {
 
     private BaloonColors color;
@@ -12,18 +14,16 @@ class Factory extends Thread {
 
     @Override
     public void run() {
-        int waitTime;
-        while(true) {
-            waitTime = 600 + (int)(Math.random()*1000);
+        Random random = new Random();
+        //noinspection EndlessStream
+        random.ints(600, 1600).forEach(waitTime -> {
             try {
                 Thread.sleep(waitTime);
+                storage.addBaloon(new Baloon(color));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            synchronized (storage) {
-                storage.addBaloon(new Baloon(color));
-            }
-        }
+        });
     }
 
 }
