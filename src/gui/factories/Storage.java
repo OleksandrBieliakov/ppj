@@ -22,13 +22,12 @@ class Storage extends JFrame {
     void addBaloon(Baloon baloon) {
         if (size == 99) {
             System.out.println("RELEASE CALL");
-            SwingUtilities.invokeLater(panel::clearStatic);
             new ReleaseThread(new LinkedList<>(baloons), panel).start();
+            SwingUtilities.invokeLater(panel::clearStatic);
             baloons.clear();
             size = 0;
         }
-        baloon.setPosition(size);
-        baloon.setAltitude(size++);
+        baloon.setPosition(size++);
         baloons.add(baloon);
         SwingUtilities.invokeLater(() -> {
             panel.addStatic(baloon);

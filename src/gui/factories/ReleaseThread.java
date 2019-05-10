@@ -7,14 +7,15 @@ public class ReleaseThread extends Thread {
 
     private final LinkedList<Baloon> baloons;
     private final StoragePanel panel;
+    private int sz;
 
     ReleaseThread(LinkedList<Baloon> baloons, StoragePanel panel) {
         this.baloons = baloons;
         this.panel = panel;
+        sz = baloons.size();
     }
 
     private void altitudeWork() {
-        int sz = baloons.size();
         int altitude;
         for (int i = 0; i < sz; ++i) {
             altitude = baloons.get(i).getAltitude() + 1;
@@ -30,9 +31,31 @@ public class ReleaseThread extends Thread {
         }
     }
 
+    private void altitudeInitial() {
+        int altitude;
+        for(Baloon b : baloons) {
+            altitude = b.getAltitude() + 1;
+            b.setAltitude(altitude);
+            if(altitude == 1) {
+                SwingUtilities.invokeLater(() -> {
+                    panel.load(baloons);
+                });
+                try {
+                    Thread.sleep(40);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                SwingUtilities.invokeLater(panel::repaint);
+                altitudeInitial();
+                return;
+            }
+        }
+    }
+
     public void run() {
         System.out.println("RELEASE START");
-        while (baloons.size() > 0) {
+        altitudeInitial();
+        while (sz > 0) {
             SwingUtilities.invokeLater(this::altitudeWork);
             SwingUtilities.invokeLater(() -> {
                 panel.load(baloons);
