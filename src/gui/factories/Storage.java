@@ -1,6 +1,7 @@
 package gui.factories;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.LinkedList;
 
 class Storage extends JFrame {
@@ -17,7 +18,8 @@ class Storage extends JFrame {
     Storage() {
         baloons = new LinkedList<>();
         panel = new StoragePanel();
-        setSize(1024, 768);
+        int size = (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.95);
+        setSize(size, size);
         setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
