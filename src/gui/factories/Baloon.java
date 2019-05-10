@@ -5,7 +5,7 @@ import java.awt.*;
 class Baloon {
 
     private Color color;
-    private int altitude = -99;
+    private int altitude = 0;
     private int position = 0;
 
     Baloon(BaloonColors colorName) {

@@ -7,14 +7,24 @@ import java.util.LinkedList;
 class StoragePanel extends JPanel {
 
     private LinkedList<Baloon> baloons;
+    private LinkedList<Baloon> staticBaloons;
 
     StoragePanel() {
         setBackground(Color.DARK_GRAY);
         baloons = new LinkedList<>();
+        staticBaloons = new LinkedList<>();
     }
 
     void load(LinkedList<Baloon> batch) {
         baloons = batch;
+    }
+
+    void addStatic(Baloon baloon) {
+        staticBaloons.add(baloon);
+    }
+
+    void clearStatic() {
+        staticBaloons.clear();
     }
 
     @Override
@@ -24,9 +34,15 @@ class StoragePanel extends JPanel {
 
         int frameHeight = getHeight();
         int width = getWidth() / 99;
-        int height = frameHeight / 99 * 3;
+        int height = frameHeight / 99 * 2;
         double altitudeUnit = (double)frameHeight / 1000;
-        int positionX, altitudeY;
+        int positionX, altitudeY = frameHeight - height;
+
+        for (Baloon baloon : staticBaloons) {
+            mainGraphics.setColor(baloon.getColor());
+            positionX = baloon.getPosition() * width;
+            mainGraphics.fillOval(positionX, altitudeY, width, height);
+        }
 
         for (Baloon baloon : baloons) {
             mainGraphics.setColor(baloon.getColor());

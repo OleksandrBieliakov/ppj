@@ -38,7 +38,7 @@ public class ReleaseThread extends Thread {
                 panel.load(baloons);
             });
             try {
-                Thread.sleep(50);
+                Thread.sleep(40);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
