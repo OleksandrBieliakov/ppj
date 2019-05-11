@@ -54,9 +54,7 @@ public class ReleaseThread extends Thread {
             }
             SwingUtilities.invokeLater(panel::repaint);
         }
-        SwingUtilities.invokeLater(() -> {
-            panel.load(baloons);
-        });
+        SwingUtilities.invokeLater(() -> panel.load(baloons));
         SwingUtilities.invokeLater(panel::repaint);
         System.out.println("RELEASE FINISH");
     }

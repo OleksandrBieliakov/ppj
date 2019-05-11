@@ -38,9 +38,7 @@ class Storage extends JFrame {
         if (LEAPS == 0 || leap < LEAPS) {
             baloon.setPosition(size++);
             baloons.add(baloon);
-            SwingUtilities.invokeLater(() -> {
-                panel.addStatic(baloon);
-            });
+            SwingUtilities.invokeLater(() -> panel.addStatic(baloon));
             SwingUtilities.invokeLater(panel::repaint);
             System.out.println("(" + size + ")col: " + baloon.getColor() + ", a: " + baloon.getAltitude() + ", p: " + baloon.getPosition());
         }
