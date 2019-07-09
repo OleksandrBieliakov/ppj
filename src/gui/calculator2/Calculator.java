@@ -154,7 +154,7 @@ class Calculator extends JPanel {
 
         OperButton plusB = new OperButton("+", this);
 
-        CalButton equalsB = new CalButton("=", this);
+        EqualsButton equalsB = new EqualsButton("=", this);
 
         buttons.add(clearB);
         buttons.add(backspaceB);
