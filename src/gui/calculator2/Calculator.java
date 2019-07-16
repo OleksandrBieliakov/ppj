@@ -5,6 +5,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -231,6 +233,15 @@ class Calculator extends JPanel {
         buttons.add(equalsB);
 
         add(buttons);
+
+        addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                switch ( e.getKeyCode() ) {
+                    case KeyEvent.VK_UP:
+                        System.out.println("!!!!!!!!!!!!!!!!!!!!!11");
+                }
+            }
+        });
     }
 
     void toHex() {
@@ -318,5 +329,6 @@ class Calculator extends JPanel {
     NumSyst getSystem() {
         return numSyst;
     }
+
 
 }
