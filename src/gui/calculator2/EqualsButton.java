@@ -195,7 +195,9 @@ class EqualsButton extends CalButton {
         addActionListener(e -> {
             String str = cal.getOutput();
             str = completeInput(str);
-            cal.setOutput(str + "=" + calculate(str));
+            String result = calculate(str);
+            cal.updateHistory(str + "=" + result);
+            cal.setOutput(result);
         });
     }
 }

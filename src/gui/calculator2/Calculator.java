@@ -1,6 +1,8 @@
 package gui.calculator2;
 
 import javax.swing.*;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,16 +10,36 @@ import java.util.regex.Pattern;
 class Calculator extends JPanel {
 
     private JLabel output = new JLabel();
+    private JTextPane  history = new JTextPane();
+    private JButton systems = new JButton("DEC");
+    private DecListener decL = new DecListener(this);
+    private HexListener hexL = new HexListener(this);
+    private LettersPanel lettersPanel = new LettersPanel(this);
 
     Calculator() {
+
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setAlignmentX(RIGHT_ALIGNMENT);
+
+        SimpleAttributeSet attribs = new SimpleAttributeSet();
+        StyleConstants.setAlignment(attribs, StyleConstants.ALIGN_RIGHT);
+        history.setParagraphAttributes(attribs, true);
+        history.setPreferredSize(new Dimension(100, 100));
+        history.setEditable(false);
+        history.setText("HISTORY");
+        JScrollPane scr = new JScrollPane(history);
+        add(scr);
+
+
         output.setText("0");
-        output.setPreferredSize(new Dimension(100, 30));
         output.setHorizontalAlignment(SwingConstants.RIGHT);
-        setLayout(new BorderLayout());
-        add(output);
+        JPanel panel = new JPanel();
+        panel.add(output);
+        output.setPreferredSize(new Dimension(300, 30));
+        add(panel);
+
 
         JPanel buttons = new JPanel(new GridLayout(5, 5));
-
 
         JButton clearB = new JButton("C");
         clearB.addActionListener(e -> {
@@ -124,7 +146,7 @@ class Calculator extends JPanel {
         };
         OperButton percentB = new OperButton("%", this);
 
-        JButton lettersB = new JButton("A-X");
+        systems.addActionListener(decL);
 
         NumButton num0B = new NumButton("0", this);
 
@@ -176,13 +198,27 @@ class Calculator extends JPanel {
         buttons.add(num3B);
         buttons.add(minusB);
         buttons.add(percentB);
-        buttons.add(lettersB);
+        buttons.add(systems);
         buttons.add(num0B);
         buttons.add(dotB);
         buttons.add(plusB);
         buttons.add(equalsB);
 
-        add(buttons, BorderLayout.SOUTH);
+        add(buttons);
+    }
+
+    void toHex() {
+        systems.setText("HEX");
+        add(lettersPanel);
+        systems.removeActionListener(decL);
+        systems.addActionListener(hexL);
+    }
+
+    void toDec() {
+        systems.setText("DEC");
+        remove(lettersPanel);
+        systems.removeActionListener(hexL);
+        systems.addActionListener(decL);
     }
 
     String getOutput() {
@@ -191,6 +227,10 @@ class Calculator extends JPanel {
 
     void setOutput(String s) {
         output.setText(s);
+    }
+
+    void updateHistory(String s) {
+        history.setText(history.getText() + "\n" + s);
     }
 
 }
