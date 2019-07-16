@@ -3,15 +3,16 @@ package gui.calculator2;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class DecListener implements ActionListener {
-    private Calculator cal;
+public class OctListener implements ActionListener {
 
-    DecListener(Calculator cal) {
-        this.cal = cal;
+    Calculator cal;
+
+    OctListener(Calculator calculator) {
+        cal = calculator;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        cal.toHex();
+        cal.toBin();
     }
 }

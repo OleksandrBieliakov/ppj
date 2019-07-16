@@ -1,19 +1,28 @@
 package gui.calculator2;
 
+import java.awt.*;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class EqualsButton extends CalButton {
 
+    private static NumSyst numSyst;
+
     EqualsButton(String title, Calculator cal) {
         super(title, cal);
+        setBackground(Color.ORANGE);
+        setForeground(Color.BLACK);
+    }
+
+    private static Matcher getMatcher(String str) {
+        Pattern p = Pattern.compile("-?\\d+\\.*\\d*");
+        return p.matcher(str);
     }
 
     private static String parseFirstNumber(String str) {
         String res = "";
-        Pattern p = Pattern.compile("-?\\d+\\.*\\d*");
-        Matcher matcher = p.matcher(str);
+        Matcher matcher = getMatcher(str);
         if (matcher.find()) {
             res = matcher.group();
         }
@@ -22,8 +31,7 @@ class EqualsButton extends CalButton {
 
     private static String parseLastNumber(String str) {
         String res = "";
-        Pattern p = Pattern.compile("-?\\d+\\.*\\d*");
-        Matcher matcher = p.matcher(str);
+        Matcher matcher = getMatcher(str);
         while (matcher.find()) {
             res = matcher.group();
         }
@@ -42,10 +50,10 @@ class EqualsButton extends CalButton {
         int minInd = str.indexOf("-");
         int plusInd = str.indexOf("+");
         if (minInd == -1) return plusInd;
-
         if (minInd == 0) {
-            str = str.substring(1);
-            return appearsFirstMinus(str);
+            int secondRound = appearsFirstMinus(str.substring(1));
+            if (secondRound == -1) return secondRound;
+            return secondRound + 1;
         }
         if (plusInd != -1) return minInd < plusInd ? minInd : plusInd;
         return minInd;
@@ -170,6 +178,7 @@ class EqualsButton extends CalButton {
         symbols.add('+');
         symbols.add('-');
         symbols.add('^');
+        symbols.add('.');
         if (symbols.contains(str.charAt(str.length() - 1))) {
             str = str.substring(0, str.length() - 1);
         }
@@ -190,14 +199,99 @@ class EqualsButton extends CalButton {
         return str;
     }
 
+    private static String hexToDec(String str) {
+        Pattern p = Pattern.compile("-?[0-9A-F]+");
+        Matcher m = p.matcher(str);
+        String s;
+        String result = str;
+        double num;
+        int ind, len;
+        while (m.find()) {
+            s = m.group();
+            ind = result.indexOf(s);
+            len = s.length();
+            num = Long.parseLong(s, 16);
+            if (ind + len < result.length())
+                result = result.substring(0, ind) + num + result.substring(ind + len);
+            else result = result.substring(0, ind) + num;
+        }
+        return result;
+    }
+
+    private static String octToDec(String str) {
+        Pattern p = Pattern.compile("-?[0-7]+");
+        Matcher m = p.matcher(str);
+        String s;
+        String result = str;
+        double num;
+        int ind, len;
+        while (m.find()) {
+            s = m.group();
+            ind = result.indexOf(s);
+            len = s.length();
+            num = Long.parseLong(s, 8);
+            if (ind + len < result.length())
+                result = result.substring(0, ind) + num + result.substring(ind + len);
+            else result = result.substring(0, ind) + num;
+        }
+        return result;
+    }
+
+    private static String binToDec(String str) {
+        Pattern p = Pattern.compile("-?[0-1]+");
+        Matcher m = p.matcher(str);
+        String s;
+        String result = str;
+        double num;
+        int ind, len;
+        while (m.find()) {
+            s = m.group();
+            ind = result.indexOf(s);
+            len = s.length();
+            num = Long.parseLong(s, 2);
+            if (ind + len < result.length())
+                result = result.substring(0, ind) + num + result.substring(ind + len);
+            else result = result.substring(0, ind) + num;
+        }
+        return result;
+    }
+
     @Override
     void addListener() {
         addActionListener(e -> {
-            String str = cal.getOutput();
-            str = completeInput(str);
-            String result = calculate(str);
-            cal.updateHistory(str + "=" + result);
-            cal.setOutput(result);
+            String strOriginal = cal.getOutput();
+            numSyst = cal.getSystem();
+            strOriginal = completeInput(strOriginal);
+            String operated = strOriginal;
+            String result = "ERROR", decRes = "ERROR";
+            switch (numSyst) {
+                case HEXADECIMAL:
+                    operated = hexToDec(operated);
+                    decRes = calculate(operated);
+                    result = Integer.toHexString((int) Double.parseDouble(decRes));
+                    result = result.toUpperCase();
+                    break;
+                case OCTAL:
+                    operated = octToDec(operated);
+                    decRes = calculate(operated);
+                    result = Integer.toOctalString((int) Double.parseDouble(decRes));
+                    break;
+                case BINARY:
+                    operated = binToDec(operated);
+                    decRes = calculate(operated);
+                    result = Integer.toBinaryString((int) Double.parseDouble(decRes));
+                    break;
+            }
+            if (!numSyst.equals(NumSyst.DECIMAL)) {
+                cal.updateHistory(strOriginal + "=" + result);
+                cal.updateHistory("(" + operated + "=" + decRes + ")");
+                cal.setOutput(result);
+            } else {
+                decRes = calculate(operated);
+                cal.updateHistory(operated + "=" + decRes);
+                cal.setOutput(decRes);
+            }
+
         });
     }
 }

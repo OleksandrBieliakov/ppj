@@ -1,6 +1,7 @@
 package gui.calculator2;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
@@ -10,16 +11,33 @@ import java.util.regex.Pattern;
 class Calculator extends JPanel {
 
     private JLabel output = new JLabel();
-    private JTextPane  history = new JTextPane();
-    private JButton systems = new JButton("DEC");
+    private JTextPane history = new JTextPane();
+    private CalButton systems = new CalButton("DEC", this) {
+        @Override
+        void addListener() {
+        }
+    };
     private DecListener decL = new DecListener(this);
     private HexListener hexL = new HexListener(this);
+    private OctListener octL = new OctListener(this);
+    private BinListener binL = new BinListener(this);
     private LettersPanel lettersPanel = new LettersPanel(this);
+    private NumSyst numSyst = NumSyst.DECIMAL;
+    private OperButton dotB;
+    private NumButton num1B = new NumButton("1", this);
+    private NumButton num2B = new NumButton("2", this);
+    private NumButton num3B = new NumButton("3", this);
+    private NumButton num4B = new NumButton("4", this);
+    private NumButton num5B = new NumButton("5", this);
+    private NumButton num6B = new NumButton("6", this);
+    private NumButton num7B = new NumButton("7", this);
+    private NumButton num8B = new NumButton("8", this);
+    private NumButton num9B = new NumButton("9", this);
+    private NumButton num0B = new NumButton("0", this);
 
     Calculator() {
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setAlignmentX(RIGHT_ALIGNMENT);
 
         SimpleAttributeSet attribs = new SimpleAttributeSet();
         StyleConstants.setAlignment(attribs, StyleConstants.ALIGN_RIGHT);
@@ -27,26 +45,36 @@ class Calculator extends JPanel {
         history.setPreferredSize(new Dimension(100, 100));
         history.setEditable(false);
         history.setText("HISTORY");
+        history.setBackground(Color.LIGHT_GRAY);
         JScrollPane scr = new JScrollPane(history);
         add(scr);
 
 
         output.setText("0");
         output.setHorizontalAlignment(SwingConstants.RIGHT);
-        JPanel panel = new JPanel();
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        panel.setBackground(Color.LIGHT_GRAY);
+        panel.setMaximumSize(new Dimension(2000, 30));
+        output.setBorder(new EmptyBorder(5, 5, 5, 5));
+        output.setFont(new Font(getFont().getName(), Font.BOLD, 20));
         panel.add(output);
-        output.setPreferredSize(new Dimension(300, 30));
         add(panel);
 
 
         JPanel buttons = new JPanel(new GridLayout(5, 5));
 
-        JButton clearB = new JButton("C");
-        clearB.addActionListener(e -> {
-            output.setText("0");
-        });
+        CalButton clearB = new CalButton("C", this) {
+            @Override
+            void addListener() {
+                addActionListener(e -> {
+                    output.setText("0");
+                });
+            }
+        };
+        clearB.setBackground(Color.ORANGE);
+        clearB.setForeground(Color.BLACK);
 
-        CalButton backspaceB = new CalButton("Del", this) {
+        CalButton backspaceB = new CalButton("DEL", this) {
             @Override
             void addListener() {
                 addActionListener(e -> {
@@ -92,18 +120,17 @@ class Calculator extends JPanel {
             }
         };
 
-        JButton xB = new JButton("Poly");
+        CalButton xB = new CalButton("POLY", this) {
+            @Override
+            void addListener() {
 
-        NumButton num7B = new NumButton("7", this);
-        NumButton num8B = new NumButton("8", this);
-        NumButton num9B = new NumButton("9", this);
+            }
+        };
+        xB.setBackground(Color.ORANGE);
+        xB.setForeground(Color.BLACK);
 
         OperButton divisionB = new OperButton("/", this);
         OperButton xPowerB = new OperButton("^", this);
-
-        NumButton num4B = new NumButton("4", this);
-        NumButton num5B = new NumButton("5", this);
-        NumButton num6B = new NumButton("6", this);
 
         OperButton multiplB = new OperButton("*", this);
         OperButton sqRootB = new OperButton("\u221A", this) {
@@ -124,9 +151,6 @@ class Calculator extends JPanel {
             }
         };
 
-        NumButton num1B = new NumButton("1", this);
-        NumButton num2B = new NumButton("2", this);
-        NumButton num3B = new NumButton("3", this);
 
         OperButton minusB = new OperButton("-", this) {
             @Override
@@ -144,13 +168,15 @@ class Calculator extends JPanel {
                 });
             }
         };
+
+        systems.setBackground(Color.ORANGE);
+        systems.setForeground(Color.BLACK);
+
         OperButton percentB = new OperButton("%", this);
 
         systems.addActionListener(decL);
 
-        NumButton num0B = new NumButton("0", this);
-
-        OperButton dotB = new OperButton(".", this) {
+        dotB = new OperButton(".", this) {
             @Override
             void addListener() {
                 addActionListener(e -> {
@@ -212,13 +238,69 @@ class Calculator extends JPanel {
         add(lettersPanel);
         systems.removeActionListener(decL);
         systems.addActionListener(hexL);
+        numSyst = NumSyst.HEXADECIMAL;
+        output.setText("0");
+        dotB.setEnabled(false);
+        dotB.setBackground(Color.GRAY);
+    }
+
+    void toOct() {
+        systems.setText("OCT");
+        remove(lettersPanel);
+        systems.removeActionListener(hexL);
+        systems.addActionListener(octL);
+        numSyst = NumSyst.OCTAL;
+        output.setText("0");
+        num8B.setEnabled(false);
+        num8B.setBackground(Color.GRAY);
+        num9B.setEnabled(false);
+        num9B.setBackground(Color.GRAY);
+    }
+
+    void toBin() {
+        systems.setText("BIN");
+        systems.removeActionListener(octL);
+        systems.addActionListener(binL);
+        numSyst = NumSyst.BINARY;
+        output.setText("0");
+        num2B.setEnabled(false);
+        num2B.setBackground(Color.GRAY);
+        num3B.setEnabled(false);
+        num3B.setBackground(Color.GRAY);
+        num4B.setEnabled(false);
+        num4B.setBackground(Color.GRAY);
+        num5B.setEnabled(false);
+        num5B.setBackground(Color.GRAY);
+        num6B.setEnabled(false);
+        num6B.setBackground(Color.GRAY);
+        num7B.setEnabled(false);
+        num7B.setBackground(Color.GRAY);
     }
 
     void toDec() {
         systems.setText("DEC");
-        remove(lettersPanel);
-        systems.removeActionListener(hexL);
+        systems.removeActionListener(binL);
         systems.addActionListener(decL);
+        numSyst = NumSyst.DECIMAL;
+        output.setText("0");
+        dotB.setEnabled(true);
+        dotB.setBackground(Color.DARK_GRAY);
+        num2B.setEnabled(true);
+        num2B.setBackground(Color.DARK_GRAY);
+        num3B.setEnabled(true);
+        num3B.setBackground(Color.DARK_GRAY);
+        num4B.setEnabled(true);
+        num4B.setBackground(Color.DARK_GRAY);
+        num5B.setEnabled(true);
+        num5B.setBackground(Color.DARK_GRAY);
+        num6B.setEnabled(true);
+        num6B.setBackground(Color.DARK_GRAY);
+        num7B.setEnabled(true);
+        num7B.setBackground(Color.DARK_GRAY);
+        num8B.setEnabled(true);
+        num8B.setBackground(Color.DARK_GRAY);
+        num9B.setEnabled(true);
+        num9B.setBackground(Color.DARK_GRAY);
     }
 
     String getOutput() {
@@ -231,6 +313,10 @@ class Calculator extends JPanel {
 
     void updateHistory(String s) {
         history.setText(history.getText() + "\n" + s);
+    }
+
+    NumSyst getSystem() {
+        return numSyst;
     }
 
 }
