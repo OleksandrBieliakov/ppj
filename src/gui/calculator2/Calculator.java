@@ -5,7 +5,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -36,6 +36,19 @@ class Calculator extends JPanel {
     private NumButton num8B = new NumButton("8", this);
     private NumButton num9B = new NumButton("9", this);
     private NumButton num0B = new NumButton("0", this);
+    private OperButton plusB = new OperButton("+", this);
+    private EqualsButton equalsB = new EqualsButton("=", this);
+    private OperButton percentB = new OperButton("%", this);
+    private OperButton divisionB = new OperButton("/", this);
+    private OperButton powerB = new OperButton("^", this);
+    private OperButton multiplB = new OperButton("*", this);
+    private NumButton openBracketB = new NumButton("(", this);
+    private OperButton closeBracketB;
+    private CalButton backspaceB;
+    private CalButton clearB;
+    private CalButton polyB;
+    private OperButton sqRootB;
+    private OperButton minusB;
 
     Calculator() {
 
@@ -65,7 +78,7 @@ class Calculator extends JPanel {
 
         JPanel buttons = new JPanel(new GridLayout(5, 5));
 
-        CalButton clearB = new CalButton("C", this) {
+        clearB = new CalButton("C", this) {
             @Override
             void addListener() {
                 addActionListener(e -> {
@@ -76,7 +89,7 @@ class Calculator extends JPanel {
         clearB.setBackground(Color.ORANGE);
         clearB.setForeground(Color.BLACK);
 
-        CalButton backspaceB = new CalButton("DEL", this) {
+        backspaceB = new CalButton("DEL", this) {
             @Override
             void addListener() {
                 addActionListener(e -> {
@@ -91,8 +104,7 @@ class Calculator extends JPanel {
             }
         };
 
-        NumButton addB = new NumButton("(", this);
-        OperButton removeB = new OperButton(")", this) {
+        closeBracketB = new OperButton(")", this) {
             @Override
             void addListener() {
                 addActionListener(e -> {
@@ -122,20 +134,16 @@ class Calculator extends JPanel {
             }
         };
 
-        CalButton xB = new CalButton("POLY", this) {
+        polyB = new CalButton("POLY", this) {
             @Override
             void addListener() {
 
             }
         };
-        xB.setBackground(Color.ORANGE);
-        xB.setForeground(Color.BLACK);
+        polyB.setBackground(Color.ORANGE);
+        polyB.setForeground(Color.BLACK);
 
-        OperButton divisionB = new OperButton("/", this);
-        OperButton xPowerB = new OperButton("^", this);
-
-        OperButton multiplB = new OperButton("*", this);
-        OperButton sqRootB = new OperButton("\u221A", this) {
+        sqRootB = new OperButton("\u221A", this) {
             @Override
             void addListener() {
                 addActionListener(e -> {
@@ -154,7 +162,7 @@ class Calculator extends JPanel {
         };
 
 
-        OperButton minusB = new OperButton("-", this) {
+        minusB = new OperButton("-", this) {
             @Override
             void addListener() {
                 addActionListener(e -> {
@@ -173,8 +181,6 @@ class Calculator extends JPanel {
 
         systems.setBackground(Color.ORANGE);
         systems.setForeground(Color.BLACK);
-
-        OperButton percentB = new OperButton("%", this);
 
         systems.addActionListener(decL);
 
@@ -202,20 +208,16 @@ class Calculator extends JPanel {
             }
         };
 
-        OperButton plusB = new OperButton("+", this);
-
-        EqualsButton equalsB = new EqualsButton("=", this);
-
         buttons.add(clearB);
         buttons.add(backspaceB);
-        buttons.add(addB);
-        buttons.add(removeB);
-        buttons.add(xB);
+        buttons.add(openBracketB);
+        buttons.add(closeBracketB);
+        buttons.add(polyB);
         buttons.add(num7B);
         buttons.add(num8B);
         buttons.add(num9B);
         buttons.add(divisionB);
-        buttons.add(xPowerB);
+        buttons.add(powerB);
         buttons.add(num4B);
         buttons.add(num5B);
         buttons.add(num6B);
@@ -234,14 +236,119 @@ class Calculator extends JPanel {
 
         add(buttons);
 
-        addKeyListener(new KeyAdapter() {
-            public void keyTyped(KeyEvent e) {
-                switch ( e.getKeyCode() ) {
-                    case KeyEvent.VK_UP:
-                        System.out.println("!!!!!!!!!!!!!!!!!!!!!11");
-                }
+        setKeyBindings();
+    }
+
+    private void setKeyBindings() {
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD0, 0), "click0");
+        getInputMap().put(KeyStroke.getKeyStroke("0"), "click0");
+        getActionMap().put("click0", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                num0B.doClick();
             }
         });
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD1, 0), "click1");
+        getInputMap().put(KeyStroke.getKeyStroke("1"), "click1");
+        getActionMap().put("click1", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                num1B.doClick();
+            }
+        });
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD2, 0), "click2");
+        getInputMap().put(KeyStroke.getKeyStroke("2"), "click2");
+        getActionMap().put("click2", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                num2B.doClick();
+            }
+        });
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD3, 0), "click3");
+        getInputMap().put(KeyStroke.getKeyStroke("3"), "click3");
+        getActionMap().put("click3", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                num3B.doClick();
+            }
+        });
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD4, 0), "click4");
+        getInputMap().put(KeyStroke.getKeyStroke("4"), "click4");
+        getActionMap().put("click4", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                num4B.doClick();
+            }
+        });
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD5, 0), "click5");
+        getInputMap().put(KeyStroke.getKeyStroke("5"), "click5");
+        getActionMap().put("click5", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                num5B.doClick();
+            }
+        });
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD6, 0), "click6");
+        getInputMap().put(KeyStroke.getKeyStroke("6"), "click6");
+        getActionMap().put("click6", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                num6B.doClick();
+            }
+        });
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD7, 0), "click7");
+        getInputMap().put(KeyStroke.getKeyStroke("7"), "click7");
+        getActionMap().put("click7", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                num7B.doClick();
+            }
+        });
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD8, 0), "click8");
+        getInputMap().put(KeyStroke.getKeyStroke("8"), "click8");
+        getActionMap().put("click8", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                num8B.doClick();
+            }
+        });
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD9, 0), "click9");
+        getInputMap().put(KeyStroke.getKeyStroke("9"), "click9");
+        getActionMap().put("click9", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                num9B.doClick();
+            }
+        });
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "clear");
+        getActionMap().put("clear", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clearB.doClick();
+            }
+        });
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, 0), "del");
+        getActionMap().put("del", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                backspaceB.doClick();
+            }
+        });
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_OPEN_BRACKET, 0), "addBr");
+        getActionMap().put("addBr", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                openBracketB.doClick();
+            }
+        });
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_CLOSE_BRACKET, 0), "closeBr");
+        getActionMap().put("closeBr", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                closeBracketB.doClick();
+            }
+        });
+
     }
 
     void toHex() {
