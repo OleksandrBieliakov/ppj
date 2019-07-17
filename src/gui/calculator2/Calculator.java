@@ -6,6 +6,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -334,21 +335,82 @@ class Calculator extends JPanel {
                 backspaceB.doClick();
             }
         });
-        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_OPEN_BRACKET, 0), "addBr");
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_9, InputEvent.SHIFT_MASK), "addBr");
         getActionMap().put("addBr", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 openBracketB.doClick();
             }
         });
-        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_CLOSE_BRACKET, 0), "closeBr");
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_0, InputEvent.SHIFT_MASK), "closeBr");
         getActionMap().put("closeBr", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 closeBracketB.doClick();
             }
         });
-
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_DIVIDE, 0), "divide");
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_SLASH, 0), "divide");
+        getActionMap().put("divide", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                divisionB.doClick();
+            }
+        });
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_6, InputEvent.SHIFT_MASK), "power");
+        getActionMap().put("power", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                powerB.doClick();
+            }
+        });
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_8, InputEvent.SHIFT_MASK), "mult");
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_MULTIPLY, 0), "mult");
+        getActionMap().put("mult", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                multiplB.doClick();
+            }
+        });
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_SUBTRACT, 0), "minus");
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_MINUS, 0), "minus");
+        getActionMap().put("minus", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                minusB.doClick();
+            }
+        });
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_5, InputEvent.SHIFT_MASK), "percent");
+        getActionMap().put("percent", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                percentB.doClick();
+            }
+        });
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_EQUALS, InputEvent.SHIFT_MASK), "plus");
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ADD, 0), "plus");
+        getActionMap().put("plus", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                plusB.doClick();
+            }
+        });
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_EQUALS, 0), "equals");
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "equals");
+        getActionMap().put("equals", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                equalsB.doClick();
+            }
+        });
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_PERIOD, 0), "dot");
+        getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_DECIMAL, 0), "dot");
+        getActionMap().put("dot", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dotB.doClick();
+            }
+        });
     }
 
     void toHex() {
