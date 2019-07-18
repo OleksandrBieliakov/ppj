@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 
 class Calculator extends JPanel {
 
+    private MainFrame frame;
     private JLabel output = new JLabel();
     private JTextPane history = new JTextPane();
     private CalButton systems = new CalButton("DEC", this) {
@@ -50,8 +51,12 @@ class Calculator extends JPanel {
     private CalButton polyB;
     private OperButton sqRootB;
     private OperButton minusB;
+    private OnPolyListener onPolyListener= new OnPolyListener(this);
+    private OffPolyListener offPolyListener = new OffPolyListener(this);
 
-    Calculator() {
+    Calculator(MainFrame frame) {
+
+        this.frame = frame;
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -138,7 +143,7 @@ class Calculator extends JPanel {
         polyB = new CalButton("POLY", this) {
             @Override
             void addListener() {
-
+                addActionListener(onPolyListener);
             }
         };
         polyB.setBackground(Color.ORANGE);
@@ -481,6 +486,22 @@ class Calculator extends JPanel {
         num8B.setBackground(Color.DARK_GRAY);
         num9B.setEnabled(true);
         num9B.setBackground(Color.DARK_GRAY);
+    }
+
+    void onPoly() {
+        polyB.setForeground(Color.ORANGE);
+        polyB.setBackground(Color.BLACK);
+        frame.displayPoly();
+        polyB.removeActionListener(onPolyListener);
+        polyB.addActionListener(offPolyListener);
+    }
+
+    void offPoly() {
+        polyB.setForeground(Color.BLACK);
+        polyB.setBackground(Color.ORANGE);
+        frame.hidePoly();
+        polyB.removeActionListener(offPolyListener);
+        polyB.addActionListener(onPolyListener);
     }
 
     String getOutput() {
