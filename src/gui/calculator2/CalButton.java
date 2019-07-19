@@ -16,7 +16,6 @@ class CalButton extends JButton {
         setForeground(Color.WHITE);
         addListener();
         setFont(new Font(getFont().getName(), Font.BOLD, 15));
-        focusListener();
     }
 
     void addListener() {
@@ -25,9 +24,4 @@ class CalButton extends JButton {
         });
     }
 
-    void focusListener() {
-        addActionListener(e -> {
-            cal.requestFocus();
-        });
-    }
 }

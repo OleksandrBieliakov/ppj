@@ -2,20 +2,22 @@ package gui.calculator2;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
-public class MainFrame extends JFrame{
+public class MainFrame extends JFrame {
 
-    private PolyDisplay p1 = new PolyDisplay();
-    private PolyMemory p2 = new PolyMemory();
+    ArrayList<Polynomial> list = new ArrayList<>();
+    private PolyDisplay p1 = new PolyDisplay(this);
+    private PolyMemory p2 = new PolyMemory(this);
     private Calculator cal = new Calculator(this);
 
     MainFrame(String s) {
         super(s);
         add(cal, BorderLayout.CENTER);
+
         p1.setPreferredSize(new Dimension(100, 400));
-        p1.setBackground(Color.RED);
-        p2.setPreferredSize(new Dimension(300, 200));
-        p2.setBackground(Color.YELLOW);
+        p1.setBackground(Color.LIGHT_GRAY);
+
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         pack();
@@ -24,6 +26,7 @@ public class MainFrame extends JFrame{
         add(p2, BorderLayout.EAST);
         p1.setVisible(false);
         p2.setVisible(false);
+        list.add(new Polynomial("4x^3+2x+69"));
     }
 
     void displayPoly() {
@@ -35,8 +38,6 @@ public class MainFrame extends JFrame{
     void hidePoly() {
         p1.setVisible(false);
         p2.setVisible(false);
-       // remove(p1);
-        //remove(p2);
         pack();
     }
 
@@ -53,6 +54,8 @@ public class MainFrame extends JFrame{
         }
 
         MainFrame f = new MainFrame("Calculator");
+
+
 
     }
 }

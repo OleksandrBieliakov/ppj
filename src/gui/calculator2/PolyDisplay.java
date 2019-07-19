@@ -2,5 +2,13 @@ package gui.calculator2;
 
 import javax.swing.*;
 
-public class PolyDisplay extends JPanel {
+class PolyDisplay extends JPanel {
+
+    private MainFrame frame;
+
+    PolyDisplay (MainFrame f) {
+        frame = f;
+    }
+
+
 }
