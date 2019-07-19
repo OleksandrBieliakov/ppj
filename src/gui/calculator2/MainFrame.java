@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class MainFrame extends JFrame {
 
     ArrayList<Polynomial> list = new ArrayList<>();
-    private PolyDisplay p1 = new PolyDisplay(this);
+    PolyDisplay p1 = new PolyDisplay(this);
     private PolyMemory p2 = new PolyMemory(this);
     private Calculator cal = new Calculator(this);
 

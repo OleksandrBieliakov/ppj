@@ -62,6 +62,7 @@ class PolyMemory extends JPanel {
                     ex.printStackTrace();
                 }
                 table.updateUI();
+                frame.p1.repaint();
             }
         });
 

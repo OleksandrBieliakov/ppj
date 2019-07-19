@@ -46,7 +46,6 @@ public class TableModel extends AbstractTableModel {
 
     @Override
     public void setValueAt(Object val, int r, int c) {
-        System.out.println(val + " " + r + " " + c);
         Polynomial p = parent.frame.list.get(r);
         switch (c) {
             case 0:
@@ -64,6 +63,7 @@ public class TableModel extends AbstractTableModel {
                 break;
         }
         parent.frame.list.set(r, p);
+        parent.frame.p1.repaint();
         fireTableCellUpdated(r, c);
     }
 

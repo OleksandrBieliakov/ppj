@@ -23,7 +23,7 @@ class Polynomial {
     int getY(int x) {
         int y = 0;
         for (PolyElement e : elements) {
-            if(e.hasX) y += Math.pow(x, e.power)*e.ind;
+            if(e.hasX) y += (Math.pow(x, e.power))*e.ind;
             else y+= e.ind;
         }
         return y;
@@ -47,6 +47,10 @@ class Polynomial {
             if(!indexS.equals("")) indexN = Double.parseDouble(indexS);
             if(!xS.equals("")) hasX = true;
             if(!powerS.equals("")) powerN = Integer.parseInt(powerS);
+
+            ////////////////////////////////////
+            System.out.println(indexN + " " + hasX + " " + powerN);
+
             newPoly.add(new PolyElement(indexN, hasX, powerN));
             comp = comp + indexS + xS + powerS;
         }
