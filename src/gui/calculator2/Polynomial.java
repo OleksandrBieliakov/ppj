@@ -44,13 +44,16 @@ class Polynomial {
             indexS = m.group(1);
             xS = m.group(2);
             powerS = m.group(3);
-            if(!indexS.equals("")) indexN = Double.parseDouble(indexS);
+            if(!indexS.equals("")) {
+                if(indexS.equals("-")) indexN = -1;
+                else indexN = Double.parseDouble(indexS);
+            }
             if(!xS.equals("")) hasX = true;
             if(!powerS.equals("")) powerN = Integer.parseInt(powerS);
 
             if((indexS + xS + powerS).equals("")) break;
 
-            //System.out.println(indexN + " " + hasX + " " + powerN);
+            System.out.println(indexN + " " + hasX + " " + powerN);
 
             newPoly.add(new PolyElement(indexN, hasX, powerN));
             comp = comp + indexS + xS + powerS;
