@@ -53,6 +53,9 @@ class Polynomial {
 
             newPoly.add(new PolyElement(indexN, hasX, powerN));
             comp = comp + indexS + xS + powerS;
+            indexN = 1;
+            hasX = false;
+            powerN = 1;
         }
         if(!s.equals(comp)) throw new DataFormatException();
         text = s;
