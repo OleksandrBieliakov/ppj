@@ -3,6 +3,7 @@ package gui.calculator2;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.util.zip.DataFormatException;
 
 class PolyMemory extends JPanel {
 
@@ -20,29 +21,10 @@ class PolyMemory extends JPanel {
         addB.setFont(new Font(getFont().getName(), Font.BOLD, 15));
         removeB.setFont(new Font(getFont().getName(), Font.BOLD, 15));
 
-
-        addB.addActionListener(e -> {
-            addNewPoly();
-        });
-        removeB.addActionListener(e -> {
-            removePoly();
-        });
-        //buttonsP.setBackground(Color.LIGHT_GRAY);
         buttonsP.add(addB);
         buttonsP.add(removeB);
     }
 
-    private void addNewPoly() {
-        System.out.println("ADD P");
-    }
-
-    private void removePoly() {
-        System.out.println("REMOVE P");
-    }
-
-    private void editPoly() {
-        System.out.println("EDIT P");
-    }
 
     PolyMemory(MainFrame f) {
         frame = f;
@@ -72,12 +54,15 @@ class PolyMemory extends JPanel {
         table.setRowSelectionAllowed(false);
 
         addB.addActionListener(e -> {
-            String s = JOptionPane.showInputDialog("Enter a polynomial");
+            String s = JOptionPane.showInputDialog("Enter a polynomial (e.g. 2.5x^2-x+3)");
             if (s != null) {
-                frame.list.add(new Polynomial(s));
+                try {
+                    frame.list.add(new Polynomial(s));
+                } catch (DataFormatException ex) {
+                    ex.printStackTrace();
+                }
                 table.updateUI();
             }
-
         });
 
         removeB.addActionListener(e -> {

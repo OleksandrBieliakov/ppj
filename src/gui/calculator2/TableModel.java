@@ -2,6 +2,7 @@ package gui.calculator2;
 
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
+import java.util.zip.DataFormatException;
 
 public class TableModel extends AbstractTableModel {
 
@@ -55,7 +56,11 @@ public class TableModel extends AbstractTableModel {
                 p.color = (Color) val;
                 break;
             case 2:
-                p.text = (String) val;
+                try {
+                    p.extractElements((String) val);
+                } catch (DataFormatException e) {
+                    e.printStackTrace();
+                }
                 break;
         }
         parent.frame.list.set(r, p);

@@ -26,7 +26,6 @@ public class MainFrame extends JFrame {
         add(p2, BorderLayout.EAST);
         p1.setVisible(false);
         p2.setVisible(false);
-        list.add(new Polynomial("4x^3+2x+69"));
     }
 
     void displayPoly() {
