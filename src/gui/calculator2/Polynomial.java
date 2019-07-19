@@ -30,6 +30,7 @@ class Polynomial {
     }
 
     void extractElements(String s) throws DataFormatException {
+        s = s.trim();
         LinkedList<PolyElement> newPoly = new LinkedList<>();
         Pattern p = Pattern.compile("([-+]?\\d*\\.?\\d*)([xX]?\\^?)(\\d*)");
         Matcher m = p.matcher(s);

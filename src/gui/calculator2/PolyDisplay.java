@@ -22,7 +22,7 @@ class PolyDisplay extends JPanel {
 
         //System.out.println("w:" + w + " h:" + h + "\n");
 
-        g.setColor(Color.DARK_GRAY);
+        g.setColor(Color.BLUE);
         g.drawLine(w / 2, 0, w / 2, h);
         g.drawLine(0, h / 2, w, h / 2);
 
