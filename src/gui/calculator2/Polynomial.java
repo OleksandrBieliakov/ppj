@@ -53,7 +53,7 @@ class Polynomial {
 
             if((indexS + xS + powerS).equals("")) break;
 
-            System.out.println(indexN + " " + hasX + " " + powerN);
+           // System.out.println(indexN + " " + hasX + " " + powerN);
 
             newPoly.add(new PolyElement(indexN, hasX, powerN));
             comp = comp + indexS + xS + powerS;
