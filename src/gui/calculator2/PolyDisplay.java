@@ -6,7 +6,7 @@ import java.awt.*;
 class PolyDisplay extends JPanel {
 
     private MainFrame frame;
-    private final int step = 2;
+    private final int step = 1;
     private final int range = 100;
 
     PolyDisplay(MainFrame f) {
