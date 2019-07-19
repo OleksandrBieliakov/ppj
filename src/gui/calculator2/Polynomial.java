@@ -48,6 +48,7 @@ class Polynomial {
             if(!xS.equals("")) hasX = true;
             if(!powerS.equals("")) powerN = Integer.parseInt(powerS);
 
+            if((indexS + xS + powerS).equals("")) break;
             ////////////////////////////////////
             System.out.println(indexN + " " + hasX + " " + powerN);
 
