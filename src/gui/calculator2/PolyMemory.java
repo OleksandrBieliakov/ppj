@@ -71,6 +71,7 @@ class PolyMemory extends JPanel {
             if(i != -1) {
                 frame.list.remove(i);
                 table.updateUI();
+                frame.p1.repaint();
             }
         });
 
