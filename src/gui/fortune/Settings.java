@@ -18,13 +18,12 @@ import java.util.TreeSet;
 
 class Settings extends BorderPane {
 
-    private final String fileName = "data/gui/fortuneStrings";
+    private static final String FILE_NAME = "data/gui/fortuneStrings";
 
     private ObservableList<String> all;
     private ObservableList<String> selected;
     private ListView<String> allView;
     private ListView<String> selectedView;
-    private VBox buttons = new VBox();
 
     Settings(Main main) {
         selected = FXCollections.observableArrayList(new TreeSet<>());
@@ -37,6 +36,7 @@ class Settings extends BorderPane {
         Button removeB = new Button("Remove");
         Button newGameB = new Button("New game");
         Button backB = new Button("Back");
+        VBox buttons = new VBox();
 
         EventHandler<ActionEvent> transfer = event -> {
             ListView<String> fromView;
@@ -62,7 +62,7 @@ class Settings extends BorderPane {
         EventHandler<ActionEvent> addNew = event -> {
             String s = JOptionPane.showInputDialog("Enter new phrase");
             if (s != null) {
-                try (PrintWriter pw = new PrintWriter(new FileWriter(fileName, true), true)) {
+                try (PrintWriter pw = new PrintWriter(new FileWriter(FILE_NAME, true), true)) {
                     pw.println(s);
                     all.add(s);
                 } catch (IOException e) {
@@ -111,7 +111,7 @@ class Settings extends BorderPane {
         Set<String> allTmp = new TreeSet<>();
         allTmp.addAll(all);
         allTmp.addAll(selected);
-        try (PrintWriter pw = new PrintWriter(new FileWriter(fileName))) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(FILE_NAME))) {
             for (String i : allTmp) {
                 pw.println(i);
             }
@@ -123,7 +123,7 @@ class Settings extends BorderPane {
     private void readFile() {
         Set<String> set = new TreeSet<>();
         try {
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
+            BufferedReader br = new BufferedReader(new FileReader(FILE_NAME));
             String s;
             while ((s = br.readLine()) != null) {
                 set.add(s);
