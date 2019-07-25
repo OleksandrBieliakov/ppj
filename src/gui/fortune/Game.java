@@ -49,11 +49,13 @@ class Game extends BorderPane {
         playB.setOnAction(play);
 
         buttonsAndStats.getChildren().addAll(settingsB, showLives, showScore, playB);
-        buttonsAndStats.setPadding(new Insets(10));
         buttonsAndStats.setSpacing(10);
         buttonsAndStats.setAlignment(Pos.CENTER);
 
+        setPadding(new Insets(10));
+        setMargin(wheel, new Insets(20));
         setTop(grid);
+        setCenter(wheel);
         setBottom(buttonsAndStats);
 
     }
