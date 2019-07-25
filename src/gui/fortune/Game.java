@@ -19,29 +19,34 @@ class Game extends BorderPane {
     Game(Main main, String draw) {
 
         PhraseGrid grid = new PhraseGrid(draw);
+        Wheel wheel = new Wheel();
+        HBox buttonsAndStats = new HBox();
 
         Button settingsB = new Button("Settings");
         Button playB = new Button("Play");
         Label showLives = new Label("Opportunities: " + lives);
         Label showScore = new Label("Score: " + score);
-        HBox buttonsAndStats = new HBox();
-
 
         EventHandler<ActionEvent> openSettings = event -> main.openSettings();
         settingsB.setOnAction(openSettings);
         EventHandler<ActionEvent> play = event -> {
+            int prise = wheel.roll();
             if (!grid.tryGuess()) {
                 showLives.setText("Opportunities: " + --lives);
                 if (lives <= 0) {
                     JOptionPane.showMessageDialog(null, "GAME OVER! YOUR SCORE: " + score);
-                    buttonsAndStats.getChildren().remove(playB);
+                    playB.setDisable(true);
                 }
             } else {
-                System.out.println("YOU GUESSED WRIGHT!");
+                score += prise;
+                showScore.setText("Score: " + score);
+                if (grid.hasWon()) {
+                    JOptionPane.showMessageDialog(null, "YOU WON! YOUR SCORE: " + score);
+                    playB.setDisable(true);
+                }
             }
         };
         playB.setOnAction(play);
-
 
         buttonsAndStats.getChildren().addAll(settingsB, showLives, showScore, playB);
         buttonsAndStats.setPadding(new Insets(10));
