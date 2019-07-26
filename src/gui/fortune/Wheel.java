@@ -34,8 +34,11 @@ class Wheel extends Group {
 
     private Timeline anim;
     private DoubleProperty time;
+    private Game game;
 
-    Wheel() {
+    Wheel(Game game) {
+
+        this.game = game;
 
         Circle pointer = new Circle(X0, POINTER_RADIUS, POINTER_RADIUS, Color.RED);
         pointer.setStroke(Color.BLACK);
@@ -57,7 +60,7 @@ class Wheel extends Group {
             line.setStartX(X0);
             line.setStartY(Y0);
 
-            double positioner = POSITIONER_STEP * sect - Math.PI/2 - POSITIONER_STEP/2;
+            double positioner = POSITIONER_STEP * sect - Math.PI / 2 - POSITIONER_STEP / 2;
 
             DoubleBinding xLineBind = new DoubleBinding() {
                 {
@@ -124,11 +127,23 @@ class Wheel extends Group {
         anim = new Timeline(new KeyFrame(Duration.seconds(PERIOD), new KeyValue(time, PERIOD)));
         anim.setCycleCount(Animation.INDEFINITE);
 
-        anim.play();
     }
 
-    int roll() {
-        return 100;
+    void roll() {
+        anim.play();
+        Thread thread = new Thread(() -> {
+            int sectorsToGo = 5 + (int)(Math.random()*5);
+            System.out.println("sectorsToGo: " + sectorsToGo);
+            double timeToGo = sectorsToGo * PERIOD/SECTORS;
+            try {
+                Thread.sleep((long)(timeToGo * 1000));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            anim.pause();
+            game.newGuess(100);
+        });
+        thread.start();
     }
 
 }
