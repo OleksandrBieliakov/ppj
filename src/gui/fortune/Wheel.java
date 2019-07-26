@@ -7,6 +7,7 @@ import javafx.animation.Timeline;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.concurrent.Task;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -29,8 +30,8 @@ class Wheel extends Group {
             OMEGA = 2 * Math.PI / PERIOD,
             PRISE_RADIUS = 0.8 * RADIUS,
             POSITIONER_STEP = Math.PI * 2 / SECTORS,
-            TEXT_POSITIONER = (PERIOD / SECTORS) / 2;
-
+            TEXT_POSITIONER = (PERIOD / SECTORS) / 2,
+            SECTOR_TIME = PERIOD / SECTORS;
 
     private Timeline anim;
     private DoubleProperty time;
@@ -131,19 +132,38 @@ class Wheel extends Group {
 
     void roll() {
         anim.play();
-        Thread thread = new Thread(() -> {
-            int sectorsToGo = 5 + (int)(Math.random()*5);
-            System.out.println("sectorsToGo: " + sectorsToGo);
-            double timeToGo = sectorsToGo * PERIOD/SECTORS;
-            try {
-                Thread.sleep((long)(timeToGo * 1000));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        Task task = new Task<Void>() {
+            @Override
+            protected Void call() {
+                int sectorsToGo = 5 + (int) (Math.random() * 6);
+                double timeToGo = sectorsToGo * SECTOR_TIME;
+                try {
+                    Thread.sleep((long) (timeToGo * 1000));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                anim.pause();
+                game.newGuess(findPrise());
+                return null;
             }
-            anim.pause();
-            game.newGuess(100);
-        });
+        };
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
         thread.start();
+    }
+
+    private int findPrise() {
+        for (Object o : getChildren()) {
+            if (o.getClass().equals(Text.class)) {
+                Text text = (Text) o;
+                int diffX = (int) Math.abs(text.xProperty().get() - X0);
+                int diffY = (int) Math.abs(text.yProperty().get() - (Y0 - PRISE_RADIUS));
+                if (diffX < 20 && diffY < 20) {
+                    return Integer.parseInt(text.getText());
+                }
+            }
+        }
+        return -1;
     }
 
 }

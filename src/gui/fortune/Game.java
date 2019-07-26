@@ -1,5 +1,8 @@
 package gui.fortune;
 
+import javafx.application.Platform;
+import javafx.beans.binding.StringBinding;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -13,14 +16,15 @@ import javax.swing.*;
 
 class Game extends BorderPane {
 
-    private int score = 0;
-    private int lives = 3;
+    private SimpleIntegerProperty score;
+    private SimpleIntegerProperty lives;
     private PhraseGrid grid;
     private Button playB;
-    private Label showLives;
-    private Label showScore;
 
     Game(Main main, String draw) {
+
+        score = new SimpleIntegerProperty(0);
+        lives = new SimpleIntegerProperty(3);
 
         grid = new PhraseGrid(draw);
         Wheel wheel = new Wheel(this);
@@ -28,8 +32,8 @@ class Game extends BorderPane {
 
         Button settingsB = new Button("Settings");
         playB = new Button("Play");
-        showLives = new Label("Opportunities: " + lives);
-        showScore = new Label("Score: " + score);
+        Label showLives = new Label();
+        Label showScore = new Label();
 
         EventHandler<ActionEvent> openSettings = event -> main.openSettings();
         settingsB.setOnAction(openSettings);
@@ -43,6 +47,30 @@ class Game extends BorderPane {
         buttonsAndStats.setSpacing(10);
         buttonsAndStats.setAlignment(Pos.CENTER);
 
+        StringBinding scoreBinding = new StringBinding() {
+            {
+                super.bind(score);
+            }
+
+            @Override
+            protected String computeValue() {
+                return "Score: " + score.get();
+            }
+        };
+        StringBinding livesBinding = new StringBinding() {
+            {
+                super.bind(lives);
+            }
+
+            @Override
+            protected String computeValue() {
+                return "Opportunities: " + lives.get();
+            }
+        };
+
+        showLives.textProperty().bind(scoreBinding);
+        showScore.textProperty().bind(livesBinding);
+
         setPadding(new Insets(10));
         setMargin(wheel, new Insets(20));
         setTop(grid);
@@ -52,20 +80,22 @@ class Game extends BorderPane {
     }
 
     void newGuess(int prise) {
-        if (!grid.tryGuess()) {
-            showLives.setText("Opportunities: " + --lives);
-            if (lives <= 0) {
-                JOptionPane.showMessageDialog(null, "GAME OVER! YOUR SCORE: " + score);
-                playB.setDisable(true);
+        Thread thread = new Thread(() -> {
+            if (!grid.tryGuess()) {
+                lives.setValue(lives.get() - 1);
+                if (lives.get() <= 0) {
+                    JOptionPane.showMessageDialog(null, "GAME OVER! YOUR SCORE: " + score.get());
+                    playB.setDisable(true);
+                }
+            } else {
+                score.setValue(score.get() + prise);
+                if (grid.hasWon()) {
+                    JOptionPane.showMessageDialog(null, "YOU WON! YOUR SCORE: " + score.get());
+                    playB.setDisable(true);
+                }
             }
-        } else {
-            score += prise;
-            showScore.setText("Score: " + score);
-            if (grid.hasWon()) {
-                JOptionPane.showMessageDialog(null, "YOU WON! YOUR SCORE: " + score);
-                playB.setDisable(true);
-            }
-        }
+        });
+        Platform.runLater(thread);
     }
 
 }

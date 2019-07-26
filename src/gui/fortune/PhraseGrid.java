@@ -22,7 +22,7 @@ class PhraseGrid extends VBox {
         String s;
         char letter;
         while (true) {
-            if ((s = JOptionPane.showInputDialog("Enter one new letter")) != null && s.length() <= 1 && (letter = s.toUpperCase().charAt(0)) >= 'A' && letter <= 'Z' && !opened.contains(letter))
+            if ((s = JOptionPane.showInputDialog("Enter one new letter")) != null && !s.equals("") && s.length() <= 1 && (letter = s.toUpperCase().charAt(0)) >= 'A' && letter <= 'Z' && !opened.contains(letter))
                 break;
         }
         if (unopened.contains(letter)) {
