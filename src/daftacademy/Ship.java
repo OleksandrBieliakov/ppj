@@ -58,6 +58,7 @@ public class Ship {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", category='" + category + '\'' +
+                ", containers=" + containers +
                 '}';
     }
 
