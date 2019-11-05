@@ -75,8 +75,14 @@ public class Parser {
     public static void addContainers(List<Ship> ships, List<Container> containers) {
         Iterator<Ship> iteratorShips = ships.iterator();
         Iterator<Container> iteratorContainers = containers.iterator();
-        while (iteratorShips.hasNext())
-            iteratorShips.next().addContainer(iteratorContainers.next());
+        Ship ship;
+        Container container;
+        while (iteratorShips.hasNext()) {
+            ship = iteratorShips.next();
+            container = iteratorContainers.next();
+            if(container != null)
+                ship.addContainer(container);
+        }
     }
 
     public static String[] split(String line) {

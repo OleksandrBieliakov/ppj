@@ -37,6 +37,10 @@ public class Ship {
         containers.add(container);
     }
 
+    public int numberOfContainers() {
+        return containers.size();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -58,7 +62,6 @@ public class Ship {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", category='" + category + '\'' +
-                ", containers=" + containers +
                 '}';
     }
 

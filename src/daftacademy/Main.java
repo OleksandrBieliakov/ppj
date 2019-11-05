@@ -38,6 +38,13 @@ public class Main {
         for(Ship ship : ships)
             System.out.println(ship);
         */
+        File file = new File("data/daftacademy/dane.csv");
+        List<Ship> ships = Parser.parseCSV(file);
+
+        System.out.println("Total: " + Analyser.totalNumberOfContainers(ships));
+        for(Ship ship : ships)
+            System.out.println(ship + " containers: " + ship.numberOfContainers());
+
 
     }
 
