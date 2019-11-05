@@ -41,10 +41,12 @@ public class Main {
         File file = new File("data/daftacademy/dane.csv");
         List<Ship> ships = Parser.parseCSV(file);
 
-        System.out.println("Total: " + Analyser.totalNumberOfContainers(ships));
-        for(Ship ship : ships)
-            System.out.println(ship + " containers: " + ship.numberOfContainers());
-
+        System.out.println("1.Total number of containers on all ships: " + Analyser.totalNumberOfContainers(ships));
+        System.out.println("2.Containers shipped to Japan: " + Analyser.numberOfContainersDeliveredToCountry(ships, "JP"));
+        System.out.println("3.Ship category which carries the biggest number of containers on average: " + Analyser.shipCategoryCarryingMostContainers(ships));
+        System.out.println("4.Average container with X1 weight: " + Analyser.averageContainerWeightWith(ships, "X1"));
+        System.out.println("5.Firm from Poland which sent the biggest number of containers: " + Analyser.firmFromCountrySentMostContainers(ships, "pl"));
+        System.out.println("6.The most expensive cargo exported from Germany: " + Analyser.mostExpensiveCargoTypeExportedFromCountry(ships, "de"));
 
     }
 
