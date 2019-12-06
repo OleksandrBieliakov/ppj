@@ -16,7 +16,7 @@ public class Keywords {
         int al = arr.length;
         int[] count = new int[al];
 
-        FileInputStream fis = new FileInputStream("C:\\Projects\\java-tutorial1\\src\\ppj.tutorial\\keywords\\Keywords.java");
+        FileInputStream fis = new FileInputStream("src\\ppj\\tutorial\\keywords\\Keywords.java");
         StringBuilder sb = new StringBuilder();
         String st;
         int read;

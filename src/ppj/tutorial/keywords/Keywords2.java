@@ -15,7 +15,7 @@ class Keywords2 {
     public Keywords2(){
 
         String data = this.fisToStringBuffer(
-                "C:\\Projects\\java-tutorial1\\src\\ppj.tutorial\\keywords\\Keywords2.java"
+                "src\\ppj\\tutorial\\keywords\\Keywords2.java"
         );
 
         for(int i=0;i<keyWords.length; i++) {
